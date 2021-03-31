@@ -1,4 +1,4 @@
-## 2021/03/10
+## 2021-03-10
 
 #### Tecnologia
   Unity (C#): Gráfica - RVs
