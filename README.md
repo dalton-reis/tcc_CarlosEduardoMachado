@@ -1,2 +1,1 @@
-# tcc_CarlosEduardoMachado
-TCC: em desenvolvimento.
+# TCC: em desenvolvimento.
