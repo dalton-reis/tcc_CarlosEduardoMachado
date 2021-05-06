@@ -1,5 +1,5 @@
-## Banca: prof. Marcel
-## [video](./tcc_BrunoHenriqueBorba_2021-05-03_PreProjeto_Defesa.mp4)
+n## Banca: prof. Marcel
+## [video](./tcc_CarlosEduardoMachado_2021-05-06_PreProjeto_Defesa.mp4)
 
 Inicio: 18:50<br>
 Fim: 19:11
