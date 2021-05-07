@@ -1,5 +1,7 @@
 n## Banca: prof. Marcel
 ## [video](./tcc_CarlosEduardoMachado_2021-05-06_PreProjeto_Defesa.mp4)
+## [revisão banca Andreza](./tcc_CarlosEduardoMachado_2021-05-06_PreProjeto_banca_Andreza.pdf)
+## [revisão banca Marcel](./tcc_CarlosEduardoMachado_2021-05-06_PreProjeto_banca_Marcel.pdf)
 
 Inicio: 18:50<br>
 Fim: 19:11
