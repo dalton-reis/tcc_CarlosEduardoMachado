@@ -22,3 +22,6 @@ nele. Penso que poderia ser incorporado nele melhorias apontadas nos dois TCCs
 No caso o uso de IA no comportamento dos animais.
 
 ----------
+#### 2021-05-06
+##### Defesa Pré-projeto
+[Anotações de defesa do Pré-projeto](./tcc_CarlosEduardoMachado_2021-05-06_PreProjeto_Defesa.md)
