@@ -5,7 +5,6 @@
 ### Tecnologia
 
   Unity (C#): Gráfica - RVs
-  carmachado
 
 Projeto Habitat: química / biologia / educação  
 
@@ -63,8 +62,8 @@ ProjectSettings
 Lista tarefas organizando por prioridade e por grupo  
 -> Olhar os teus objetivos e requisitos, o que achar mais ..  
 
-A) Ressusitar/Usar o código do Waltrick <https://github.com/dalton-reis/tcc_MatheusWaltrichSilva> (+++)
-D) Ressusitar (exemplo) o código do João <https://github.com/dalton-reis/tcc_JoaoMarcosEstevao> (+++)  
+A) Ressuscitar/Usar o código do Waltrick <https://github.com/dalton-reis/tcc_MatheusWaltrichSilva> (+++)
+D) Ressuscitar (exemplo) o código do João <https://github.com/dalton-reis/tcc_JoaoMarcosEstevao> (+++)  
 
-B) Adaptar a interface para não precisar usar a plca controladora (A) (+++)  
+B) Adaptar a interface para não precisar usar a placa controladora (A) (+++)  
 C) Pedir informações a mais sobre o ciclo de vida dos peixes [@dalton-reis] ... prof. Roberta  (+)
