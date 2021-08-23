@@ -1,0 +1,25 @@
+
+===> MELHORAR muito.
+__
+Mudar o fundo de tela para uma cor neutra e tirar o s ícones...
+Colocar um aplicativo de fundo com uma cor sólida (paina, etc).
+E rodar os aplicativos por cima.
+
+Seria bom mostrar executando no celular (visão CardBoard) espelhando o aparelho no PC no Teams.
+
+_ Dúvidas
+  - [01:16] painel na parte superior da janela na horizontal?
+
+-------------
+-> colocou na tela do Aquário o IP ... escrever no artigo.
+-> a explicação de como compartilhou a imagem e etc. já vai falar nos slides.
+Falar mais do uso. Mostrar no celular. Ver a sua imagem na apresentação.
+Dar um zoom do Windows para mostrar o IP, conectado. Rodar com o câmera de desenvolvedor.
+Não se justificar que não pode fazer.
+
+
+Objetivos: OK
+
+
+Requisitos: OK
+

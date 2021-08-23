@@ -8,6 +8,7 @@ TagManager:
   - Terrain
   - HealthSlider
   - Food
+  - Camera
   layers:
   - Default
   - TransparentFX

@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AquariumProperties : ScriptableObject
-{
+public class AquariumProperties : ScriptableObject {
 
     public static float aquariumTemperature;
     public static float externalTemperature;
@@ -35,6 +34,6 @@ public class AquariumProperties : ScriptableObject
     }
     public enum Wheater
     {
-        Sun = 0, SunAndCloud = 1, Snow = 2, Rain = 3, Moon = 4
+        Sun = 0,  SunAndCloud = 1, Snow = 2, Rain = 3, Moon = 4
     }
 }
