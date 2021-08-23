@@ -34,36 +34,44 @@ E este semestre tem um bolsista da segunda fase de BCC que vai "mexer" um pouco 
 
 ## 2021-08-11
 
-sobre disciplina de TCC2
+sobre disciplina de TCC2  
 
-### Parte teórica x prática
+### Parte teórica x prática  
 
 #### Parte teórica -> produzir o artigo - Slides  
 
 máximo 4 semanas só parte prática  
 pegar com TCC2 os ajustes da banca no projeto  
 ATENÇÃO: as correções são para o artigo (não no projeto)  
-Ver revisão da banca do projeto: <https://github.com/dalton-reis/tcc_CarlosEduardoMachado/blob/main/_dalton/tcc_CarlosEduardoMachado_2021-07-05_Projeto_Banca_revisao.pdf>
-Ver revisão do prof. de TCC2
-Pensar em algumas imagens suas: especificação, mostre o seu cenário, parte prática, etc.
-<https://github.com/dalton-reis/projeto_Habitat_2020_388/blob/main/_Bolsista/arquiteturaIUT_Tablet.drawio.svg>
-<https://github.com/dalton-reis/projeto_Habitat_2020_388/blob/main/_Bolsista/arquiteturaIUT_PC.drawio.svg>
-Projeto AndersonGuimaraes: <https://github.com/dalton-reis/projeto_Habitat_2020_388>
+Ver revisão da banca do projeto: <https://github.com/dalton-reis/tcc_CarlosEduardoMachado/blob/main/_dalton/tcc_CarlosEduardoMachado_2021-07-05_Projeto_Banca_revisao.pdf>  
+Ver revisão do prof. de TCC2  
+Pensar em algumas imagens suas: especificação, mostre o seu cenário, parte prática, etc.  
+<https://github.com/dalton-reis/projeto_Habitat_2020_388/blob/main/_Bolsista/arquiteturaIUT_Tablet.drawio.svg>  
+<https://github.com/dalton-reis/projeto_Habitat_2020_388/blob/main/_Bolsista/arquiteturaIUT_PC.drawio.svg>  
+Projeto AndersonGuimaraes: <https://github.com/dalton-reis/projeto_Habitat_2020_388>  
 
 #### Parte prática
 
-Versão mais nova do Unity, e não mudar até final projeto.
-Nào usar versão beta
-GitHub: ter um gitIgnore
-Assets
-Packages
-ProjectSettings
+Versão mais nova do Unity, e não mudar até final projeto.  
+Nào usar versão beta  
+GitHub: ter um gitIgnore. Só ter as pastas: Assets, Packages e ProjectSettings.  
 
 Lista tarefas organizando por prioridade e por grupo  
 -> Olhar os teus objetivos e requisitos, o que achar mais ..  
 
-A) Ressuscitar/Usar o código do Waltrick <https://github.com/dalton-reis/tcc_MatheusWaltrichSilva> (+++)
-D) Ressuscitar (exemplo) o código do João <https://github.com/dalton-reis/tcc_JoaoMarcosEstevao> (+++)  
+- [x] Ressuscitar/Usar o código do Waltrick <https://github.com/dalton-reis/tcc_MatheusWaltrichSilva> (+++)  
+      ressucitou código do FlavioOmar.  
 
-B) Adaptar a interface para não precisar usar a placa controladora (A) (+++)  
-C) Pedir informações a mais sobre o ciclo de vida dos peixes [@dalton-reis] ... prof. Roberta  (+)
+- [x] Ressuscitar (exemplo) o código do João <https://github.com/dalton-reis/tcc_JoaoMarcosEstevao> (+++)  
+      Fonte que tem o ambiente de simulação: EcosAR Ambiente Teste.  
+
+- [x] Adaptar a interface para não precisar usar a placa controladora (A) (+++)  
+
+## 2021-08-18
+
+- [ ] [@dalton-reis] Ressuscitar/Usar o código do Waltrick <https://github.com/dalton-reis/tcc_MatheusWaltrichSilva> (+++)  
+      Passar código do Waltrick  para usar no lugar do Flavio.  
+
+- [ ] [@dalton-reis] Arrumar imagem Arquitetura.  
+
+- [ ] [@dalton-reis] Pedir informações a mais sobre o ciclo de vida dos peixes ... prof. Roberta (+)  
