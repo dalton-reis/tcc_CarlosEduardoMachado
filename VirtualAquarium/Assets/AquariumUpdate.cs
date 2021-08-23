@@ -53,6 +53,7 @@ public class AquariumUpdate : NetworkBehaviour {
     public Texture2D moonImage;
     public ParticleSystem particleFood;
     public Button sairButton;
+    public Button foodIcon;
     private bool dropFood;
     private const string DEFAULT_HOUR_MASK = "HH:mm";
     private DateTime initialNight = DateTime.ParseExact ("19:00", DEFAULT_HOUR_MASK, CultureInfo.InvariantCulture);
@@ -90,6 +91,18 @@ public class AquariumUpdate : NetworkBehaviour {
             AquariumProperties.conn.OnReceive += socketCallback;
         }
 
+        foodIcon.enabled = gameController.interativa;
+        if (gameController.interativa)
+        {
+            aquariumTemperatureSlider.interactable = true;
+            aquariumTemperatureSlider.onValueChanged.AddListener(changeAquariumTemperature);
+
+            lightingSlider.interactable = true;
+            lightingSlider.onValueChanged.AddListener(changeLight);
+
+            foodIcon.onClick.AddListener(giveFood);
+        }
+
         if (AquariumProperties.configs != null) {
             AquariumProperties.currentTimeSpeed = (AquariumProperties.TimeSpeed) AquariumProperties.configs.timeSpeed;
         } else {
@@ -117,6 +130,22 @@ public class AquariumUpdate : NetworkBehaviour {
                 AquariumProperties.timeSpeedMultiplier = 3600;
                 break;
         }
+    }
+
+    private void changeLight(float intensity)
+    {
+        AquariumProperties.externalLightIntensity = intensity;
+    }
+
+    private void changeAquariumTemperature(float temperature)
+    {
+        AquariumProperties.aquariumTemperature = temperature;
+    }
+
+    private void giveFood()
+    {
+        AquariumProperties.foodAvailable--;
+        dropFood = true;
     }
 
     public string GetIP () {

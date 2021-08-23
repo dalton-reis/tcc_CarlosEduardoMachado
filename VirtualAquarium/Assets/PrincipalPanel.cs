@@ -13,6 +13,7 @@ public class PrincipalPanel : MonoBehaviour {
     public InputField Token, Wifi, SenhaWifi, ServidorMult;
 
     public Toggle IOT, Multiplayer, CameraDesenvolvimento;
+    public Toggle InterfaceInterativa;
     public Button configurarButton;
     GameController gameController;
     public Button sairButton;
@@ -45,16 +46,23 @@ public class PrincipalPanel : MonoBehaviour {
         }
     }
 
+    private void initializeController()
+    {
+        Debug.Log("Ta la"+ InterfaceInterativa.isOn);
+        gameController.iot = IOT.isOn;
+        gameController.multi = Multiplayer.isOn;
+        gameController.CameraDesenvolvimento = CameraDesenvolvimento.isOn;
+        gameController.server = ServidorMult.text;
+        gameController.interativa = InterfaceInterativa.isOn;
+    }
+
     public void StartSceneAquarium () {
         if (Multiplayer.isOn) {
             if (ServidorMult.text != "") {
                 if (IOT.isOn) {
                     if ((Token.text != "") && (Wifi.text != "") && (SenhaWifi.text != "")) {
                         connectingText.gameObject.SetActive (false);
-                        gameController.iot = IOT.isOn;
-                        gameController.multi = Multiplayer.isOn;
-                        gameController.CameraDesenvolvimento = CameraDesenvolvimento.isOn;
-                        gameController.server = ServidorMult.text;
+                        initializeController();
                         SceneManager.LoadScene ("AquariumSceneClient", LoadSceneMode.Single);
                     } else {
                         connectingText.text = "Com o IOT Ativo, necessário configurar o WIFI";
@@ -62,10 +70,7 @@ public class PrincipalPanel : MonoBehaviour {
                     }
                 } else {
                     connectingText.gameObject.SetActive (false);
-                    gameController.iot = IOT.isOn;
-                    gameController.multi = Multiplayer.isOn;
-                    gameController.CameraDesenvolvimento = CameraDesenvolvimento.isOn;
-                    gameController.server = ServidorMult.text;
+                    initializeController();
                     SceneManager.LoadScene ("AquariumSceneClient", LoadSceneMode.Single);
                 }
             } else {
@@ -77,20 +82,14 @@ public class PrincipalPanel : MonoBehaviour {
             if (IOT.isOn) {
                 if ((Token.text != "") && (Wifi.text != "") && (SenhaWifi.text != "")) {
                     connectingText.gameObject.SetActive (false);
-                    gameController.iot = IOT.isOn;
-                    gameController.multi = Multiplayer.isOn;
-                    gameController.CameraDesenvolvimento = CameraDesenvolvimento.isOn;
-                    gameController.server = ServidorMult.text;
+                    initializeController();
                     SceneManager.LoadScene ("AquariumSceneClient", LoadSceneMode.Single);
                 } else {
                     connectingText.text = "Com o IOT Ativo, necessário configurar o WIFI";
                     connectingText.gameObject.SetActive (true);
                 }
             } else {
-                gameController.iot = IOT.isOn;
-                gameController.multi = Multiplayer.isOn;
-                gameController.CameraDesenvolvimento = CameraDesenvolvimento.isOn;
-                gameController.server = ServidorMult.text;
+                initializeController();
                 SceneManager.LoadScene ("AquariumSceneClient");
             }
 

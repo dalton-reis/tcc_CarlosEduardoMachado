@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public bool multi, iot, CameraDesenvolvimento;
+    public bool multi, iot, interativa, CameraDesenvolvimento;
     public string server;
 
     public static GameController gameController;
@@ -13,14 +13,17 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Awake() {
-        if (gameController == null) {
+    void Awake()
+    {
+        if (gameController == null)
+        {
             gameController = this;
         }
-        else if (gameController != this) {
+        else if (gameController != this)
+        {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);    
+        DontDestroyOnLoad(gameObject);
     }
-    
+
 }
