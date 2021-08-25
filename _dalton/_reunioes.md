@@ -80,7 +80,6 @@ Lista tarefas organizando por prioridade e por grupo
 - [ ] [@dalton-reis] Ressuscitar o Aquário Físico (modelo tablet).  
       <https://github.com/dalton-reis/tcc_CarlosEduardoMachado/archive/refs/tags/APKIOT.zip>
 - [ ] [@dalton-reis] Ressuscitar o Aquário Físico (tentar usar o Projeto do Anderson).  
-- [ ] [@dalton-reis] 
 
 ## 2021-09-01
 
