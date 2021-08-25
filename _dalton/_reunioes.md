@@ -77,4 +77,11 @@ Lista tarefas organizando por prioridade e por grupo
 
 ## 2021-08-25
 
-- [ ] [@dalton-reis] Pedir informações a mais sobre o ciclo de vida dos peixes ... prof. Roberta (+)  
+- [ ] [@dalton-reis] Ressuscitar o Aquário Físico (modelo tablet).  
+      <https://github.com/dalton-reis/tcc_CarlosEduardoMachado/archive/refs/tags/APKIOT.zip>
+- [ ] [@dalton-reis] Ressuscitar o Aquário Físico (tentar usar o Projeto do Anderson).  
+
+## 2021-09-01
+
+- [ ] [@dalton-reis] Pedir informações a mais sobre o ciclo de vida dos peixes ... prof. Roberta (+).  
+            Agendar para 08-09-2021.  
