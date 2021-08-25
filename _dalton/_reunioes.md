@@ -75,4 +75,6 @@ Lista tarefas organizando por prioridade e por grupo
 
 - [ ] [@dalton-reis] Arrumar imagem Arquitetura.  
 
+## 2021-08-25
+
 - [ ] [@dalton-reis] Pedir informações a mais sobre o ciclo de vida dos peixes ... prof. Roberta (+)  
