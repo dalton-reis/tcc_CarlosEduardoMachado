@@ -69,8 +69,8 @@ Lista tarefas organizando por prioridade e por grupo
 
 ## 2021-08-18
 
-- [ ] [@dalton-reis] Ressuscitar/Usar o código do Waltrick <https://github.com/dalton-reis/tcc_MatheusWaltrichSilva> (+++)  
-      Passar código do Waltrick  para usar no lugar do Flavio.  
+- [x] Ressuscitar/Usar o código do Waltrick <https://github.com/dalton-reis/tcc_MatheusWaltrichSilva> (+++)  
+            [@dalton-reis]  Passar código do Waltrick  para usar no lugar do Flavio.  
       <https://github.com/dalton-reis/tcc_CarlosEduardoMachado/tree/main/fontes_antigos/tcc_MatheusWaltrichSilva/VirtualAquarium>
 
 - [ ] [@dalton-reis] Arrumar imagem Arquitetura.  
@@ -80,8 +80,12 @@ Lista tarefas organizando por prioridade e por grupo
 - [ ] [@dalton-reis] Ressuscitar o Aquário Físico (modelo tablet).  
       <https://github.com/dalton-reis/tcc_CarlosEduardoMachado/archive/refs/tags/APKIOT.zip>
 - [ ] [@dalton-reis] Ressuscitar o Aquário Físico (tentar usar o Projeto do Anderson).  
+- [ ] [@dalton-reis] 
 
 ## 2021-09-01
 
 - [ ] [@dalton-reis] Pedir informações a mais sobre o ciclo de vida dos peixes ... prof. Roberta (+).  
             Agendar para 08-09-2021.  
+- [ ] [@dalton-reis] Melhorar "desenho" da parte do "Simulador" que agora usar JSon para treinar.  
+            [cenarioAnterior.drawio.svg](cenarioAnterior.drawio.svg "cenarioAnterior.drawio.svg")  
+            Fazer: amarelo - Fazendo: azul - Feito: verde  
