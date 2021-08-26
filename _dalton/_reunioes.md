@@ -88,3 +88,5 @@ Lista tarefas organizando por prioridade e por grupo
 - [ ] [@dalton-reis] Melhorar "desenho" da parte do "Simulador" que agora usar JSon para treinar.  
             [cenarioAnterior.drawio.svg](cenarioAnterior.drawio.svg "cenarioAnterior.drawio.svg")  
             Fazer: amarelo - Fazendo: azul - Feito: verde  
+
+[@mclopes] A Roberta falou que o Sérgio Althoff talvez possa ajudar no aquário.  
