@@ -23,9 +23,8 @@ public class ParticleFood : MonoBehaviour {
             Debug.Log("P Position: x: " + p.position.x + "; y: " + p.position.x + "; z: " + p.position.z);
             GameObject sphere = Instantiate(sphereFood, gameObject.transform.TransformPoint(p.position), Quaternion.identity);
             sphere.tag = "Food";
-            foodPoint.foods.Add(sphere);
             Debug.Log("Sphere Position: x: " + sphere.transform.position.x + "; y: " + sphere.transform.position.x + "; z: " + sphere.transform.position.z);
-            foodPoint.addFood();            
+            foodPoint.addFood(sphere);            
             enter[i] = p;            
         }
         part.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);

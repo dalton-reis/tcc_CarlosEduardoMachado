@@ -1,0 +1,55 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1630498368",
+        "python_version": "3.9.6 (tags/v3.9.6:db3ff76, Jun 28 2021, 15:26:21) [MSC v.1929 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\carlo\\AppData\\Local\\Programs\\Python\\Python39\\Scripts\\mlagents-learn config/VirtualAquarium.yaml --run-id=VirtualAquarium --force",
+        "mlagents_version": "0.16.1",
+        "mlagents_envs_version": "0.16.1",
+        "communication_protocol_version": "1.0.0",
+        "tensorflow_version": "2.6.0",
+        "end_time_seconds": "1630498434"
+    },
+    "total": 65.3610298,
+    "count": 1,
+    "self": 0.13920089999999163,
+    "children": {
+        "run_training.setup": {
+            "total": 0.004365000000000174,
+            "count": 1,
+            "self": 0.004365000000000174
+        },
+        "TrainerController.start_learning": {
+            "total": 65.2174639,
+            "count": 1,
+            "self": 0.9885210000000058,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 4.2216866,
+                    "count": 1,
+                    "self": 4.2216866
+                },
+                "TrainerController.advance": {
+                    "total": 60.007256299999995,
+                    "count": 1,
+                    "self": 1.100000000064938e-05,
+                    "children": {
+                        "env_step": {
+                            "total": 60.007245299999994,
+                            "count": 1,
+                            "self": 60.00723899999999,
+                            "children": {
+                                "SubprocessEnvManager._take_step": {
+                                    "total": 6.299999999903605e-06,
+                                    "count": 1,
+                                    "self": 6.299999999903605e-06
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

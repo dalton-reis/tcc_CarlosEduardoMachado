@@ -22,6 +22,18 @@ public class FoodPoint : MonoBehaviour {
         this.foodCount++;
     }
 
+    public void addFood(GameObject obj)
+    {
+        foods.Add(obj);
+        this.foodCount++;
+    }
+
+    public void clearFood()
+    {
+        foods.Clear();
+        this.foodCount = 0;
+    }
+
     public void removeFood()
     {
         this.foodCount--;
