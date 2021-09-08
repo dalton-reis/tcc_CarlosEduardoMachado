@@ -89,4 +89,10 @@ Lista tarefas organizando por prioridade e por grupo
             [cenarioAnterior.drawio.svg](cenarioAnterior.drawio.svg "cenarioAnterior.drawio.svg")  
             Fazer: amarelo - Fazendo: azul - Feito: verde  
 
-[@mclopes] A Roberta falou que o Sérgio Althoff talvez possa ajudar no aquário.  
+[@mclopes] A Roberta falou que o Sérgio Luiz Althoff talvez possa ajudar no aquário.  
+  althoff@furb.br
+
+## 2021-09-08
+
+Ter uma rotina na parte gráfica para mover o peixe para uma posição específica.
+ML vai definir está posição e passar para o Peixe.
