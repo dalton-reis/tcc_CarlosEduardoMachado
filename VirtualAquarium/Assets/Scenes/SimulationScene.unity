@@ -12651,7 +12651,7 @@ MonoBehaviour:
   - {fileID: 1699281715987844, guid: 179cba5c4a8fbdb4f834ad47a3596856, type: 3}
   - {fileID: 1939980075445004, guid: dacf93d649323df42981d1f86e31f709, type: 3}
   - {fileID: 1327104955442478, guid: 1c56ae5a22e10c74c9590e64cc43e749, type: 3}
-  count: 10
+  count: 1
   speed: 0.5
   rotationSpeed: 9
   raycastDistance: 2
@@ -12660,7 +12660,8 @@ MonoBehaviour:
   bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  fishes: []
+  fishes:
+  - {fileID: 1218905577}
 --- !u!65 &1177938169
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12775,8 +12776,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218905575}
-  m_LocalRotation: {x: -0, y: 0.91564363, z: -0, w: -0.401991}
-  m_LocalPosition: {x: 0, y: -1.75, z: 0}
+  m_LocalRotation: {x: 0, y: 0.33486313, z: -0, w: -0.9422668}
+  m_LocalPosition: {x: -2.7527077, y: 2.7440777, z: 0.3086783}
   m_LocalScale: {x: 1.500001, y: 1.5, z: 1.500001}
   m_Children:
   - {fileID: 2140135164}
