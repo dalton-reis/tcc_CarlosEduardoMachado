@@ -107,3 +107,8 @@ Estava "preso" no trabalho.
 [ ] [@dalton-reis] Ressuscitar o Aquário Físico (modelo tablet).  
       <https://github.com/dalton-reis/tcc_CarlosEduardoMachado/archive/refs/tags/APKIOT.zip>
 [ ] [@dalton-reis] Ressuscitar o Aquário Físico (tentar usar o Projeto do Anderson).  
+
+## 2021-09-29
+
+[ ] a mente está funcionando, mas a parte gráfica não come.  
+Pedi para testar com partes injetando valores.  Fazer testes com mais peixes juntos.  
