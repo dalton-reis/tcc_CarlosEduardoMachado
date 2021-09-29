@@ -77,9 +77,6 @@ Lista tarefas organizando por prioridade e por grupo
 
 ## 2021-08-25
 
-- [ ] [@dalton-reis] Ressuscitar o Aquário Físico (modelo tablet).  
-      <https://github.com/dalton-reis/tcc_CarlosEduardoMachado/archive/refs/tags/APKIOT.zip>
-- [ ] [@dalton-reis] Ressuscitar o Aquário Físico (tentar usar o Projeto do Anderson).  
 
 ## 2021-09-01
 
@@ -89,4 +86,29 @@ Lista tarefas organizando por prioridade e por grupo
             [cenarioAnterior.drawio.svg](cenarioAnterior.drawio.svg "cenarioAnterior.drawio.svg")  
             Fazer: amarelo - Fazendo: azul - Feito: verde  
 
-[@mclopes] A Roberta falou que o Sérgio Althoff talvez possa ajudar no aquário.  
+[@mclopes] A Roberta falou que o Sérgio Luiz Althoff talvez possa ajudar no aquário.  
+  althoff@furb.br
+
+## 2021-09-08
+
+Ter uma rotina na parte gráfica para mover o peixe para uma posição específica.
+ML vai definir está posição e passar para o Peixe.
+
+## 2021-09-15
+
+Estava "preso" no trabalho.  
+
+## 2021-09-22
+
+[x] já tem a movimentação dos peixes.  
+[x] arrumou um bug que liberar alimento.  
+[ ] estava treinamento da ML .. vai refazer.  
+[ ] reprodução.  
+[ ] [@dalton-reis] Ressuscitar o Aquário Físico (modelo tablet).  
+      <https://github.com/dalton-reis/tcc_CarlosEduardoMachado/archive/refs/tags/APKIOT.zip>
+[ ] [@dalton-reis] Ressuscitar o Aquário Físico (tentar usar o Projeto do Anderson).  
+
+## 2021-09-29
+
+[ ] a mente está funcionando, mas a parte gráfica não come.  
+Pedi para testar com partes injetando valores.  Fazer testes com mais peixes juntos.  
