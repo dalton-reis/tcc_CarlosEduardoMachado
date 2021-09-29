@@ -55,6 +55,25 @@ namespace Unity.MLAgentsExamples
 
             // Make sure the Academy singleton is initialized first, since it will create the SideChannels.
             Academy.Instance.EnvironmentParameters.RegisterCallback("gravity", f => { Physics.gravity = new Vector3(0, -f, 0); });
+
+            GameObject.FindObjectOfType<GameController>().Simulador = true;
+
+            AquariumProperties.currentTimeSpeed = AquariumProperties.TimeSpeed.Fast;
+            switch (AquariumProperties.currentTimeSpeed)
+            {
+                case AquariumProperties.TimeSpeed.Fast:
+                    AquariumProperties.timeSpeedMultiplier = 30;
+                    break;
+                case AquariumProperties.TimeSpeed.Normal:
+                    AquariumProperties.timeSpeedMultiplier = 60;
+                    break;
+                case AquariumProperties.TimeSpeed.Slow:
+                    AquariumProperties.timeSpeedMultiplier = 120;
+                    break;
+                case AquariumProperties.TimeSpeed.RealTime:
+                    AquariumProperties.timeSpeedMultiplier = 3600;
+                    break;
+            }
         }
 
         public void OnDestroy()

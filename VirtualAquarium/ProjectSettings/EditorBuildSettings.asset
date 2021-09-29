@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/AquariumSceneServer.unity
     guid: f10698892ae358f429cd046748ea426b
+  - enabled: 1
+    path: Assets/Scenes/SimulationScene.unity
+    guid: be9cf7e0c658d6f41bf8db8b58056037
   m_configObjects: {}

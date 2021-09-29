@@ -15,12 +15,14 @@ public class Fish : Agent
     public FStates lastState;
     List<Transform> playersAround = new List<Transform>();
     public FishArea fishArea;
-    private Vector3 target;
+    public Vector3 target;
     public Camera camerap;
     new private Rigidbody rigidbody;
     public float moveSpeed = 0f;
     public float turnSpeed = 0f;
     private float eatRadius = 2f;
+    private Bounds bounds;
+    private Vector3 rotateTarget, position, direction, velocity;
 
     public List<Camera> cameras;
 
@@ -34,7 +36,17 @@ public class Fish : Agent
     private float timeSwimmingAway = 0;
     private float timeStayed = 0;
     public float life;
+    public float energy;
     public float lifeTime;
+    public float distanceFromTarget;
+    public float distanceFromFood;
+
+    [System.NonSerialized]
+    public float changeTarget = 0f, changeAnim = 0f, timeSinceTarget = 0f, timeSinceAnim = 0f, prevAnim, currentAnim = 0f, prevSpeed, speed, zturn, prevz,
+    turnSpeedBackup;
+    private Quaternion lookRotation;
+
+    private float rechargingEnergy;
 
     GameController gameController;
     public enum FStates
@@ -62,12 +74,14 @@ public class Fish : Agent
     private void Start()
     {
         life = 100;
+        energy = 100;
 
         if (!gameController)
             gameController = GameObject.FindObjectOfType<GameController>();
         fishArea = GameObject.FindObjectOfType<FishArea>();
         rigidbody = GetComponent<Rigidbody>();
-
+        bounds = fishArea.GetComponent<BoxCollider>().bounds;
+        state = FStates.Stay;
 
 
         if (gameController.multi)
@@ -86,84 +100,74 @@ public class Fish : Agent
     private void UpdateControllers()
     {
 
-        if (life <= 40)
-            AddReward(-1f);
-        else
-            AddReward(0.5f);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         var continuousActionsOut = actionsOut.ContinuousActions;
         continuousActionsOut[0] = -Input.GetAxis("Horizontal");
-        continuousActionsOut[1] = Input.GetAxis("Vertical");
+        continuousActionsOut[2] = Input.GetAxis("Vertical");
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
         float[] vectorAction = actions.ContinuousActions.Array;
-        Debug.Log(string.Join("|", new List<float>(vectorAction).ConvertAll<string>((value) => value.ToString()).ToArray()));
 
-
-        state = FStates.Stay;
-
-        // Converte a primeira ação em movimento para frente
-        float forwardAmount = vectorAction[0];
-        if (forwardAmount > 0)
+        if (state == FStates.Stay && HasEnergy())
+        {
             state = FStates.Patrol;
 
-        // Converte a secunda ação em virar pra esquerda ou pra direita
-        float turnAmount = vectorAction[1];
+            target = new Vector3(vectorAction[0] * fishArea.GetComponent<BoxCollider>().size.x / 2,
+                                 vectorAction[1] * fishArea.GetComponent<BoxCollider>().size.y / 2,
+                                 vectorAction[2] * fishArea.GetComponent<BoxCollider>().size.z / 2) + fishArea.transform.position;
+            Debug.Log(string.Join("|", new List<float>(vectorAction).ConvertAll<string>((value) => value.ToString()).ToArray()));
+            //Debug.Log("y" + target.y);
+        }
 
         //Converte a terceira ação para a chamada do método correspondente (1 para beber, 2 para comer)
-        if (vectorAction[2] != 0)
+        if (actions.DiscreteActions[0] == 1)
         {
             Feed();
         }
-
-        // Aplica o movimento
-        Debug.Log(turnAmount * turnSpeed);
-        transform.Rotate(transform.up, turnAmount * turnSpeed);
-        if (!CheckInvalidPosition(transform.forward * Time.fixedDeltaTime * moveSpeed * forwardAmount)) { 
-            transform.position += transform.forward * Time.fixedDeltaTime * moveSpeed * forwardAmount;
-        } else
-        {
-            AddReward(-1f / MaxStep);
-        }
-
-        // Aplica um a pequena recompensa negativa para encorajar o personagem a fazer uma ação
-        AddReward(-1f / MaxStep);
     }
 
 
     public override void OnEpisodeBegin()
     {
-        life = UnityEngine.Random.Range(50, 100);
-        fishArea.feedPoint.clearFood();
-        GameObject food = GameObject.FindGameObjectsWithTag("Food")[0];
-        food.SetActive(true);
-
-        transform.position = fishArea.GetRandomPoint();
-
-        food.transform.position = new Vector3(UnityEngine.Random.value * 12 - 6,
-                                           UnityEngine.Random.value * 4 - 2,
-                                           UnityEngine.Random.value * 2 - 1);
-
-        if (food.activeSelf)
+        if (!gameController)
+            gameController = GameObject.FindObjectOfType<GameController>();
+        if (gameController.Simulador)
         {
-            fishArea.feedPoint.addFood(food);
+            life = UnityEngine.Random.Range(50, 100);
+            energy = UnityEngine.Random.Range(50, 100);
+
+            transform.position = fishArea.GetRandomPoint();
+            state = FStates.Stay;
+
+            while (fishArea.feedPoint.foods.Count > 0)
+                fishArea.removeFood();
+
+            fishArea.particleFood.Play();
         }
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(this.transform.localPosition);
-        GameObject[] foods = GameObject.FindGameObjectsWithTag("Food");
-        GameObject food = foods[0];
-        sensor.AddObservation(food.activeSelf);
-        sensor.AddObservation(food.transform.position);
-        sensor.AddObservation((int)life);
+        sensor.AddObservation(transform.forward);
+        sensor.AddObservation(IsLowLife());
+        sensor.AddObservation(HasEnergy());
+        sensor.AddObservation((int)state);
+        sensor.AddObservation((int)distanceFromFood);
+    }
 
+    private bool IsLowLife()
+    {
+        return life <= 40;
+    }
+
+    private bool HasEnergy()
+    {
+        return energy >= 50;
     }
 
     private void Update()
@@ -198,10 +202,16 @@ public class Fish : Agent
             lifeTime += Time.deltaTime;
             if (life > 0)
             {
+                if (IsLowLife())
+                    AddReward(-1f);
+                else
+                    AddReward(0.1f);
+
                 if (lifeTime >= 1)
                 {
                     life -= AquariumProperties.lifeLostPerHour / AquariumProperties.timeSpeedMultiplier + AquariumProperties.lossLifeCoefficient;
                     lifeTime = 0;
+
                 }
                 if (timeSwimmingAway >= 1)
                 {
@@ -228,26 +238,26 @@ public class Fish : Agent
     {
         if (fishArea.feedPoint.foods.Count > 0)
         {
-            foreach (GameObject food in fishArea.feedPoint.foods)
+            GameObject food = fishArea.feedPoint.foods[0];
+            distanceFromFood = Vector3.Distance(transform.position, food.transform.position);
+            if (Vector3.Distance(transform.position, food.transform.position) < eatRadius)
             {
-                if (Vector3.Distance(transform.position, food.transform.position) < eatRadius)
-                {
-                    state = FStates.Feed;
+                Debug.Log("Comeu");
+                state = FStates.Feed;
 
-                    if (life <= 40)
-                        AddReward(1f);
-                    else
-                        AddReward(-0.5f);
+                if (IsLowLife())
+                    AddReward(10f);
+                else
+                    AddReward(-1f);
 
-                    fishArea.removeFood(food);
-                    life += UnityEngine.Random.Range(15, 30);
-                }
+                life += UnityEngine.Random.Range(15, 30);
             }
         }
     }
 
     void Die()
     {
+        AddReward(-300f);
         EndEpisode();
         return;
         transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * fishArea.speed * 0.5f);
@@ -266,10 +276,8 @@ public class Fish : Agent
 
     }
 
-    private bool CheckInvalidPosition(Vector3 _positionToCheck)
+    private bool CheckValidPosition(Vector3 _positionToCheck)
     {
-        Bounds bounds = fishArea.GetComponent<BoxCollider>().bounds;
-
         if (_positionToCheck.x < bounds.min.x || _positionToCheck.x > bounds.max.x) { return false; }
         if (_positionToCheck.y < bounds.min.y || _positionToCheck.y > bounds.max.y) { return false; }
         if (_positionToCheck.z < bounds.min.z || _positionToCheck.z > bounds.max.z) { return false; }
@@ -278,39 +286,64 @@ public class Fish : Agent
 
     void Patrol()
     {
-        animator.SetInteger("State", 1);
-        Ray ray = new Ray(transform.position, transform.forward);
-        var casts = Physics.RaycastAll(ray, fishArea.raycastDistance);
-        foreach (var cast in casts)
+        // Calculate distances
+        distanceFromTarget = Vector3.Magnitude(target - rigidbody.position);
+        rotateTarget = target;
+        // Allow drastic turns close to base to ensure target can be reached
+        if (distanceFromTarget < 2f)
         {
-            if (cast.collider.transform != this.transform)
+            if (turnSpeed != 10f && rigidbody.velocity.magnitude != 0f)
             {
-                if (cast.collider.tag.Equals("Vase") || cast.collider.tag.Equals("Terrain") || lastState == FStates.Feed)
-                {
-                    do
-                    {
-                        target = fishArea.GetRandomPoint();
-                    } while (target.y > 2);
-                }
-
-                timer = UnityEngine.Random.Range(0, 10f);
-                break;
+                turnSpeedBackup = turnSpeed;
+                turnSpeed = 10f;
             }
-        }
-        transform.position += transform.forward * Time.deltaTime * fishArea.speed;
-        transform.forward = Vector3.MoveTowards(transform.forward, target - transform.position, Time.deltaTime * fishArea.rotationSpeed);
-        if ((transform.position - target).magnitude < fishArea.speed * Time.deltaTime * 3 || timer < 0f)
-        {
-            target = fishArea.GetRandomPoint();
-            timer = UnityEngine.Random.Range(0, 10f);
-            if (UnityEngine.Random.Range(0f, 1f) > 0.9f)
+            else if (distanceFromTarget <= 0.5f)
             {
+                rigidbody.velocity = Vector3.zero;
+                turnSpeed = turnSpeedBackup;
+
                 lastState = state;
                 state = FStates.Stay;
+                AddReward(-1f);
+                return;
             }
+        }
+        if (rigidbody.transform.position.y < bounds.min.y + 1f ||
+            rigidbody.transform.position.y > bounds.max.y - 1f)
+        {
+            if (rigidbody.transform.position.y < bounds.center.x + 1f) rotateTarget.y = 0.1f; else rotateTarget.y = -0.1f;
+        }
+        // Update times
+        changeAnim -= Time.fixedDeltaTime;
+        changeTarget -= Time.fixedDeltaTime;
+        timeSinceTarget += Time.fixedDeltaTime;
+        timeSinceAnim += Time.fixedDeltaTime;
 
+        // Rotate towards target
+        Vector3 targetDirection = target - transform.position;
+        float singleStep = turnSpeed * Time.deltaTime;
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+        transform.rotation = Quaternion.LookRotation(newDirection);
+
+        // Move flyer
+        direction = Quaternion.Euler(transform.eulerAngles) * Vector3.forward;
+        rigidbody.velocity = Mathf.Lerp(prevSpeed, moveSpeed, Mathf.Clamp(timeSinceAnim / 3, 0f, 1f)) * direction;
+        // Hard-limit the height, in case the limit is breached despite of the turnaround attempt
+        if (rigidbody.transform.position.y < bounds.min.y || rigidbody.transform.position.y > bounds.max.y)
+        {
+            position = rigidbody.transform.position;
+            position.y = Mathf.Clamp(position.y, bounds.min.y, bounds.max.y);
+            rigidbody.transform.position = position;
         }
     }
+
+    // Select a new animation speed randomly
+    private float ChangeAnim(float currentAnim)
+    {
+        return 0;
+    }
+
+    // Select a new direction to fly in randomly
 
     void SwimAway()
     {
@@ -346,13 +379,13 @@ public class Fish : Agent
         switch (state)
         {
             case FStates.Patrol:
-                //Patrol();
+                Patrol();
                 break;
             case FStates.Stay:
-                //Stay();
+                Stay();
                 break;
             case FStates.SwimAway:
-                ///SwimAway();
+                SwimAway();
                 break;
             case FStates.Feed:
                 //Feed();
@@ -371,7 +404,6 @@ public class Fish : Agent
         this.iniciado = true;
         this.fishArea = fishArea;
         animator = GetComponent<Animator>();
-        target = fishArea.GetRandomPoint();
     }
 
     public void AddPlayer(Transform t)
@@ -396,27 +428,12 @@ public class Fish : Agent
                 animator.SetInteger("State", 1);
             }
         }
-        else if (other.tag == "Food" && state == FStates.Feed)
-        {
-            target = transform.position;
-            fishArea.removeFood();
-            life += UnityEngine.Random.Range(15, 30);
-            lastState = state;
-            state = FStates.Patrol;
-        }
     }
 
     public void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {
-            RemovePlayer(other.transform);
-            if (playersAround.Count == 0)
-            {
-                lastState = state;
-                state = FStates.Patrol;
-                target = fishArea.GetRandomPoint();
-            }
         }
     }
 

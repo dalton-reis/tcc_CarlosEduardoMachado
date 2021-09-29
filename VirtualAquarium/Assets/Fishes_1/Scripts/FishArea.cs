@@ -12,6 +12,7 @@ public class FishArea : MonoBehaviour
     public float raycastDistance = 10f;
     public FoodPoint feedPoint;
     public ParticleSystem particleFood;
+    public Bounds bounds;
     public int Count
     {
         get
@@ -44,9 +45,12 @@ public class FishArea : MonoBehaviour
             gameController = GameObject.FindObjectOfType<GameController>();
         }
         fishComparer = new Fish.FishComparer();
+        bounds = GetComponent<BoxCollider>().bounds;
         fishes = new List<Fish>(GameObject.FindObjectsOfType<Fish>());
         fishesOrderByFood = new List<Fish>(fishes);
         InitializeAllFishes();
+
+        SpawnFishes();
     }
 
     public void Update()
