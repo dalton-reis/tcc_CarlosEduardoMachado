@@ -112,3 +112,10 @@ Estava "preso" no trabalho.
 
 [ ] a mente está funcionando, mas a parte gráfica não come.  
 Pedi para testar com partes injetando valores.  Fazer testes com mais peixes juntos.  
+
+## 2021-10-06
+
+Mente está funcionando para parte da alimentação.  
+Vai gerar uma versão.  
+Vai trabalhar na parte da reprodução.  
+Mexer no texto.  
