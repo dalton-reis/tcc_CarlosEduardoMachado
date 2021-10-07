@@ -382,7 +382,6 @@ GameObject:
   - component: {fileID: 114574921198848426}
   - component: {fileID: 136603713176147352}
   - component: {fileID: 135478887330622788}
-  - component: {fileID: 1752110748801557209}
   - component: {fileID: 6205553710479221275}
   - component: {fileID: 2000722046765310348}
   - component: {fileID: -6202289956354390447}
@@ -455,11 +454,13 @@ MonoBehaviour:
   id: 
   identity: {fileID: 0}
   iniciado: 0
+  timeSinceFeed: 10
   life: 0
   energy: 0
   lifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
+  heuristic: {x: 0, y: 0, z: 0}
 --- !u!136 &136603713176147352
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -487,20 +488,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1752110748801557209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1785826640799354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DecisionPeriod: 10
-  TakeActionsBetweenDecisions: 1
 --- !u!114 &6205553710479221275
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -259,7 +259,6 @@ GameObject:
   - component: {fileID: 135984531856837812}
   - component: {fileID: 136537062623506934}
   - component: {fileID: 114250303551374382}
-  - component: {fileID: 949284208606326818}
   - component: {fileID: 5350749284433160594}
   - component: {fileID: 2605615239282093817}
   - component: {fileID: 8639150473240661945}
@@ -359,25 +358,13 @@ MonoBehaviour:
   id: 
   identity: {fileID: 0}
   iniciado: 0
+  timeSinceFeed: 10
   life: 0
   energy: 0
   lifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
---- !u!114 &949284208606326818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1561314948883648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DecisionPeriod: 10
-  TakeActionsBetweenDecisions: 1
+  heuristic: {x: 0, y: 0, z: 0}
 --- !u!114 &5350749284433160594
 MonoBehaviour:
   m_ObjectHideFlags: 0
