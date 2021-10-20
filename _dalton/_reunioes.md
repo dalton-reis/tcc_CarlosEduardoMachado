@@ -122,4 +122,9 @@ Mexer no texto.
 
 ## 2021-10-13
 
-Vajou no feriado e trabalhou pouco na parte da reprodução.  
+Viajou no feriado e trabalhou pouco na parte da reprodução.  
+
+## 2021-10-20
+
+- está trabalhando na rotina de reprodução.  
+- Agendar prof. Sérgio Luiz Althoff.  
