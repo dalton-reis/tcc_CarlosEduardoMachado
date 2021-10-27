@@ -105,6 +105,7 @@ MonoBehaviour:
   MaxStep: 0
   state: 0
   lastState: 0
+  gender: 0
   fishArea: {fileID: 114671405502214940}
   target: {x: 0, y: 0, z: 0}
   camerap: {fileID: 0}
@@ -114,11 +115,13 @@ MonoBehaviour:
   id: 
   identity: {fileID: 0}
   iniciado: 0
+  timeSinceFeed: 10
   life: 0
   energy: 0
   lifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
+  heuristic: {x: 0, y: 0, z: 0}
 --- !u!136 &136395892450574648
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1133,6 +1136,7 @@ MonoBehaviour:
   MaxStep: 0
   state: 0
   lastState: 0
+  gender: 0
   fishArea: {fileID: 114671405502214940}
   target: {x: 0, y: 0, z: 0}
   camerap: {fileID: 0}
@@ -1142,11 +1146,13 @@ MonoBehaviour:
   id: 
   identity: {fileID: 0}
   iniciado: 0
+  timeSinceFeed: 10
   life: 0
   energy: 0
   lifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
+  heuristic: {x: 0, y: 0, z: 0}
 --- !u!136 &136917872660314512
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1539,6 +1545,7 @@ MonoBehaviour:
   MaxStep: 0
   state: 0
   lastState: 0
+  gender: 0
   fishArea: {fileID: 114671405502214940}
   target: {x: 0, y: 0, z: 0}
   camerap: {fileID: 0}
@@ -1548,11 +1555,13 @@ MonoBehaviour:
   id: 
   identity: {fileID: 0}
   iniciado: 0
+  timeSinceFeed: 10
   life: 0
   energy: 0
   lifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
+  heuristic: {x: 0, y: 0, z: 0}
 --- !u!136 &136957184361727946
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1856,6 +1865,7 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   fishes: []
+  eggFish: {fileID: 0}
 --- !u!1 &1355610994239106
 GameObject:
   m_ObjectHideFlags: 0
@@ -2145,6 +2155,7 @@ MonoBehaviour:
   MaxStep: 0
   state: 0
   lastState: 0
+  gender: 0
   fishArea: {fileID: 114671405502214940}
   target: {x: 0, y: 0, z: 0}
   camerap: {fileID: 0}
@@ -2154,11 +2165,13 @@ MonoBehaviour:
   id: 
   identity: {fileID: 0}
   iniciado: 0
+  timeSinceFeed: 10
   life: 0
   energy: 0
   lifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
+  heuristic: {x: 0, y: 0, z: 0}
 --- !u!136 &136469307918195748
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2338,6 +2351,7 @@ MonoBehaviour:
   MaxStep: 0
   state: 0
   lastState: 0
+  gender: 0
   fishArea: {fileID: 114671405502214940}
   target: {x: 0, y: 0, z: 0}
   camerap: {fileID: 0}
@@ -2347,11 +2361,13 @@ MonoBehaviour:
   id: 
   identity: {fileID: 0}
   iniciado: 0
+  timeSinceFeed: 10
   life: 0
   energy: 0
   lifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
+  heuristic: {x: 0, y: 0, z: 0}
 --- !u!136 &136172932381369712
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2656,6 +2672,7 @@ MonoBehaviour:
   MaxStep: 0
   state: 0
   lastState: 0
+  gender: 0
   fishArea: {fileID: 114671405502214940}
   target: {x: 0, y: 0, z: 0}
   camerap: {fileID: 0}
@@ -2665,11 +2682,13 @@ MonoBehaviour:
   id: 
   identity: {fileID: 0}
   iniciado: 0
+  timeSinceFeed: 10
   life: 0
   energy: 0
   lifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
+  heuristic: {x: 0, y: 0, z: 0}
 --- !u!136 &136459938761924436
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3034,6 +3053,7 @@ MonoBehaviour:
   MaxStep: 0
   state: 0
   lastState: 0
+  gender: 0
   fishArea: {fileID: 114671405502214940}
   target: {x: 0, y: 0, z: 0}
   camerap: {fileID: 0}
@@ -3043,11 +3063,13 @@ MonoBehaviour:
   id: 
   identity: {fileID: 0}
   iniciado: 0
+  timeSinceFeed: 10
   life: 0
   energy: 0
   lifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
+  heuristic: {x: 0, y: 0, z: 0}
 --- !u!136 &136159266771520326
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3499,6 +3521,7 @@ MonoBehaviour:
   MaxStep: 0
   state: 0
   lastState: 0
+  gender: 0
   fishArea: {fileID: 114671405502214940}
   target: {x: 0, y: 0, z: 0}
   camerap: {fileID: 0}
@@ -3508,11 +3531,13 @@ MonoBehaviour:
   id: 
   identity: {fileID: 0}
   iniciado: 0
+  timeSinceFeed: 10
   life: 0
   energy: 0
   lifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
+  heuristic: {x: 0, y: 0, z: 0}
 --- !u!136 &136991667405450956
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4734,6 +4759,7 @@ MonoBehaviour:
   MaxStep: 0
   state: 0
   lastState: 0
+  gender: 0
   fishArea: {fileID: 114671405502214940}
   target: {x: 0, y: 0, z: 0}
   camerap: {fileID: 0}
@@ -4743,11 +4769,13 @@ MonoBehaviour:
   id: 
   identity: {fileID: 0}
   iniciado: 0
+  timeSinceFeed: 10
   life: 0
   energy: 0
   lifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
+  heuristic: {x: 0, y: 0, z: 0}
 --- !u!136 &136213037060397050
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5177,6 +5205,7 @@ MonoBehaviour:
   MaxStep: 0
   state: 0
   lastState: 0
+  gender: 0
   fishArea: {fileID: 114671405502214940}
   target: {x: 0, y: 0, z: 0}
   camerap: {fileID: 0}
@@ -5186,11 +5215,13 @@ MonoBehaviour:
   id: 
   identity: {fileID: 0}
   iniciado: 0
+  timeSinceFeed: 10
   life: 0
   energy: 0
   lifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
+  heuristic: {x: 0, y: 0, z: 0}
 --- !u!136 &136599515192082012
 CapsuleCollider:
   m_ObjectHideFlags: 0

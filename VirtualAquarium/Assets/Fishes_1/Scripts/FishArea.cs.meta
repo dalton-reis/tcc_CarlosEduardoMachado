@@ -3,7 +3,11 @@ guid: 7cd5b0769e95a2d45a2a51d246d298cf
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - feedPoint: {instanceID: 0}
+  - particleFood: {instanceID: 0}
+  - eggPoint: {fileID: 6423036257981454838, guid: 79ec9f70854c1df4b9527caf4e4732fd,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

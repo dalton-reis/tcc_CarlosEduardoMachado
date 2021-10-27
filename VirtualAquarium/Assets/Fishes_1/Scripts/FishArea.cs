@@ -13,6 +13,7 @@ public class FishArea : MonoBehaviour
     public FoodPoint feedPoint;
     public ParticleSystem particleFood;
     public Bounds bounds;
+
     public int Count
     {
         get
@@ -33,10 +34,10 @@ public class FishArea : MonoBehaviour
     public List<Fish> fishes;
     List<Fish> fishesOrderByFood;
     Fish.FishComparer fishComparer;
-    BoxCollider collider;
     Vector3 center;
     Vector3 max;
     Vector3 min;
+    public EggFish eggFish;
 
     void Start()
     {
@@ -45,12 +46,12 @@ public class FishArea : MonoBehaviour
             gameController = GameObject.FindObjectOfType<GameController>();
         }
         fishComparer = new Fish.FishComparer();
-        bounds = GetComponent<BoxCollider>().bounds;
         fishes = new List<Fish>(GameObject.FindObjectsOfType<Fish>());
         fishesOrderByFood = new List<Fish>(fishes);
-        InitializeAllFishes();
 
         SpawnFishes();
+        InitializeAllFishes();
+
     }
 
     public void Update()
@@ -73,10 +74,8 @@ public class FishArea : MonoBehaviour
 
     public void InitializeAllFishes()
     {
-        if (collider == null)
-            collider = GetComponent<BoxCollider>();
-        max = center + collider.size / 2f;
-        min = center - collider.size / 2f;
+        max = center + bounds.size / 2f;
+        min = center - bounds.size / 2f;
         for (int i = 0; i < fishes.Count; i++)
         {
             if (!fishes[i].iniciado)
@@ -89,11 +88,9 @@ public class FishArea : MonoBehaviour
     public void SpawnFishes()
     {
         fishes = new List<Fish>(transform.GetComponentsInChildren<Fish>());
-        if (collider == null)
-            collider = GetComponent<BoxCollider>();
-        center = collider.center;
-        max = center + collider.size / 2f;
-        min = center - collider.size / 2f;
+        center = bounds.center;
+        max = center + bounds.size / 2f;
+        min = center - bounds.size / 2f;
         if (fishes.Count < count)
             for (int i = fishes.Count; i < count; i++)
                 SpawnFish();
@@ -144,7 +141,10 @@ public class FishArea : MonoBehaviour
 
     public void SpawnFish()
     {
-        Instantiate(GetRandomPrefab(), transform);
+        GameObject fish = Instantiate(GetRandomPrefab());
+        fish.transform.parent = transform;
+
+
 
     }
 
@@ -172,13 +172,13 @@ public class FishArea : MonoBehaviour
         float y = UnityEngine.Random.Range(min.y, max.y);
         float z = UnityEngine.Random.Range(min.z, max.z);
         Vector3 p = new Vector3(x, y, z);
-        return transform.TransformPoint(p);
+        return p;
     }
 
     public void removeFood()
     {
         feedPoint.removeFood();
-        feedPoint.foods[feedPoint.foods.Count - 1].SetActive(false);
+        Destroy(feedPoint.foods[feedPoint.foods.Count - 1]);
         feedPoint.foods.RemoveAt(feedPoint.foods.Count - 1);
     }
 
@@ -202,5 +202,23 @@ public class FishArea : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void removeEggs()
+    {
+        foreach (EggFish egg in GetComponentsInChildren<EggFish>())
+        {
+            Destroy(egg.gameObject);
+        }
+    }
+
+    public void mixStaticFishPositions()
+    {
+        foreach (StaticFish item in GetComponentsInChildren<StaticFish>())
+        {
+            Transform temp = item.transform;
+            temp.position = GetRandomPoint();
+            temp.Rotate(0f, UnityEngine.Random.Range(0f, 360f), 0f, Space.Self);
+        }
     }
 }

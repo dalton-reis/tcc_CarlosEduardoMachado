@@ -9,6 +9,7 @@ TagManager:
   - HealthSlider
   - Food
   - Camera
+  - Egg
   layers:
   - Default
   - TransparentFX

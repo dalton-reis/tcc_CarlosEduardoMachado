@@ -259,6 +259,7 @@ MonoBehaviour:
   MaxStep: 50000
   state: 0
   lastState: 0
+  gender: 0
   fishArea: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   camerap: {fileID: 0}
@@ -318,6 +319,7 @@ MonoBehaviour:
   m_DetectableTags:
   - Player
   - Food
+  - Egg
   m_RaysPerDirection: 4
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.2
@@ -347,7 +349,7 @@ MonoBehaviour:
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 3
-      BranchSizes: 02000000
+      BranchSizes: 0200000002000000
     VectorActionSize: 
     VectorActionDescriptions: []
     VectorActionSpaceType: 1

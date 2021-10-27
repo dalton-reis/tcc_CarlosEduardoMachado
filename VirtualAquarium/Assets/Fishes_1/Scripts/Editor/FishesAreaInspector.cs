@@ -17,14 +17,18 @@ public class FishesAreaInspector : Editor
 
         SerializedProperty raycastDistance = serializedObject.FindProperty("raycastDistance");
         SerializedProperty particleFood = serializedObject.FindProperty("particleFood");
-        SerializedProperty feedPoint = serializedObject.FindProperty("feedPoint");                
+        SerializedProperty feedPoint = serializedObject.FindProperty("feedPoint");
+        SerializedProperty eggFish = serializedObject.FindProperty("eggFish");
+        SerializedProperty bounds = serializedObject.FindProperty("bounds");
 
         EditorGUI.BeginChangeCheck();
         EditorGUILayout.PropertyField(prop, true);
         EditorGUILayout.PropertyField(speed, true);
         EditorGUILayout.PropertyField(rotationSpeed, true);
         EditorGUILayout.PropertyField(particleFood, true);
-        EditorGUILayout.PropertyField(feedPoint, true);                
+        EditorGUILayout.PropertyField(feedPoint, true);
+        EditorGUILayout.PropertyField(eggFish, true);
+        EditorGUILayout.PropertyField(bounds, true);
 
         EditorGUILayout.PropertyField(raycastDistance, true);
 

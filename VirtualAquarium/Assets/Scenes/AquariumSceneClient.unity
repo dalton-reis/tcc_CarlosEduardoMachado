@@ -10550,7 +10550,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1177938170}
-  - component: {fileID: 1177938169}
   - component: {fileID: 1177938168}
   - component: {fileID: 1177938172}
   - component: {fileID: 1177938171}
@@ -10591,8 +10590,8 @@ MonoBehaviour:
   feedPoint: {fileID: 531284140}
   particleFood: {fileID: 1939820014}
   bounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
+    m_Center: {x: 0.3610001, y: 5.4, z: 5.552}
+    m_Extent: {x: 10, y: 4.5, z: 7.5}
   fishes:
   - {fileID: 0}
   - {fileID: 0}
@@ -10604,19 +10603,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
---- !u!65 &1177938169
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1177938167}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 13, y: 6, z: 2.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  eggFish: {fileID: 1274836939097133229, guid: ce293e55658725840a41d56ab558f426, type: 3}
 --- !u!4 &1177938170
 Transform:
   m_ObjectHideFlags: 0
