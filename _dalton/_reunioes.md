@@ -119,3 +119,12 @@ Mente está funcionando para parte da alimentação.
 Vai gerar uma versão.  
 Vai trabalhar na parte da reprodução.  
 Mexer no texto.  
+
+## 2021-10-13
+
+Viajou no feriado e trabalhou pouco na parte da reprodução.  
+
+## 2021-10-20
+
+- está trabalhando na rotina de reprodução.  
+- Agendar prof. Sérgio Luiz Althoff.  
