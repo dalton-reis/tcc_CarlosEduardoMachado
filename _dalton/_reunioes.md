@@ -128,3 +128,10 @@ Viajou no feriado e trabalhou pouco na parte da reprodução.
 
 - está trabalhando na rotina de reprodução.  
 - Agendar prof. Sérgio Luiz Althoff.  
+
+## 2021-11-03
+
+Ajustes pequenos na mente ... deixou mais tempo treinando.  
+Trabalhou no artigo.  
+Mudou o fluxograma, mais no peixe e menos no aquário.  Disse que podia usar o fluxograma que existe no GIT.  
+Chegou a hora de mostrar para o prof. Sergio.  
