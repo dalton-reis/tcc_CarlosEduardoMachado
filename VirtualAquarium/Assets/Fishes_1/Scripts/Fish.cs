@@ -60,6 +60,7 @@ public class Fish : Agent
     private Vector3 startScale;
 
     GameController gameController;
+    public float lossLifeCoefficient = 0;
     public enum FStates
     {
         Patrol,
@@ -82,6 +83,13 @@ public class Fish : Agent
         Symphysodon,
         ZanclusCornutus
     }
+
+    public float MaxTemperatureSupported = 25.5f;
+    public float MinTemperatureSupported = 22.5f;
+    public float MinLightSupportedNight = 0.0f;
+    public float MaxLightSupportedNight = 1.0f;
+    public float MinLightSupported = 1.0f;
+    public float MaxLightSupported = 2.0f;
 
     public class FishComparer : IComparer<Fish>
     {
@@ -266,7 +274,7 @@ public class Fish : Agent
 
                 if (lifeTime >= 1)
                 {
-                    life -= AquariumProperties.lifeLostPerHour / AquariumProperties.timeSpeedMultiplier + AquariumProperties.lossLifeCoefficient;
+                    life -= AquariumProperties.lifeLostPerHour / AquariumProperties.timeSpeedMultiplier + lossLifeCoefficient;
                     lifeTime = 0;
 
                     if (startScale.x > transform.localScale.x)

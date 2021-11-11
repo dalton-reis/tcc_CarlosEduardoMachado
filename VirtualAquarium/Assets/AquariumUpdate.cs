@@ -328,25 +328,38 @@ public class AquariumUpdate : NetworkBehaviour {
     }
 
     void updateHealthCoefficient () {
-        float temperatureCoefficient = 0;
-        float lightCoefficient = 0;
-        if (AquariumProperties.aquariumTemperature >= AquariumProperties.MIN_TEMPERATURE_SUPPORTED && AquariumProperties.aquariumTemperature <= AquariumProperties.MAX_TEMPERATURE_SUPPORTED) {
-            temperatureCoefficient = 0;
-        } else if (AquariumProperties.aquariumTemperature > AquariumProperties.MAX_TEMPERATURE_SUPPORTED) {
-            temperatureCoefficient = (AquariumProperties.aquariumTemperature - AquariumProperties.MAX_TEMPERATURE_SUPPORTED) * 0.03f;
-        } else if (AquariumProperties.aquariumTemperature < AquariumProperties.MIN_TEMPERATURE_SUPPORTED) {
-            temperatureCoefficient = (AquariumProperties.MIN_TEMPERATURE_SUPPORTED - AquariumProperties.aquariumTemperature) * 0.03f;
+        foreach (Fish fish in fishArea.fishes)
+        {
+            float temperatureCoefficient = 0;
+            float lightCoefficient = 0;
+            if (AquariumProperties.aquariumTemperature >= fish.MinTemperatureSupported && AquariumProperties.aquariumTemperature <= fish.MaxTemperatureSupported)
+            {
+                temperatureCoefficient = 0;
+            }
+            else if (AquariumProperties.aquariumTemperature > fish.MaxTemperatureSupported)
+            {
+                temperatureCoefficient = (AquariumProperties.aquariumTemperature - fish.MaxTemperatureSupported) * 0.03f;
+            }
+            else if (AquariumProperties.aquariumTemperature < fish.MinTemperatureSupported)
+            {
+                temperatureCoefficient = (fish.MinTemperatureSupported - AquariumProperties.aquariumTemperature) * 0.03f;
+            }
+            float maxLight = isNight ? fish.MaxLightSupportedNight : fish.MaxLightSupported;
+            float minLight = isNight ? fish.MinLightSupportedNight : fish.MinLightSupported;
+            if (AquariumProperties.lightIntensity >= minLight && AquariumProperties.lightIntensity <= maxLight)
+            {
+                lightCoefficient = 0;
+            }
+            else if (AquariumProperties.lightIntensity > maxLight)
+            {
+                lightCoefficient = (AquariumProperties.lightIntensity - maxLight) * 0.02f;
+            }
+            else if (AquariumProperties.lightIntensity < minLight)
+            {
+                lightCoefficient = (minLight - AquariumProperties.lightIntensity) * 0.02f;
+            }
+            fish.lossLifeCoefficient = lightCoefficient + temperatureCoefficient;
         }
-        float maxLight = isNight ? AquariumProperties.MAX_LIGHT_SUPPORTED_NIGHT : AquariumProperties.MAX_LIGHT_SUPPORTED;
-        float minLight = isNight ? AquariumProperties.MIN_LIGHT_SUPPORTED_NIGHT : AquariumProperties.MIN_LIGHT_SUPPORTED;
-        if (AquariumProperties.lightIntensity >= minLight && AquariumProperties.lightIntensity <= maxLight) {
-            lightCoefficient = 0;
-        } else if (AquariumProperties.lightIntensity > maxLight) {
-            lightCoefficient = (AquariumProperties.lightIntensity - maxLight) * 0.02f;
-        } else if (AquariumProperties.lightIntensity < minLight) {
-            lightCoefficient = (minLight - AquariumProperties.lightIntensity) * 0.02f;
-        }
-        AquariumProperties.lossLifeCoefficient = lightCoefficient + temperatureCoefficient;
     }
 
     public void socketCallback (string message) {
