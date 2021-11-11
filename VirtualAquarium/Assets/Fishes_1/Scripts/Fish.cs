@@ -16,6 +16,7 @@ public class Fish : Agent
     public FStates state;
     public FStates lastState;
     public Gender gender = Gender.random;
+    public Specie specie;
     private FishReproduction fishReproduction;
     List<Transform> playersAround = new List<Transform>();
     public FishArea fishArea;
@@ -66,6 +67,20 @@ public class Fish : Agent
         SwimAway,
         Feed,
         Die
+    }
+
+    public enum Specie
+    {
+        AmphiprionOcellaris,
+        BalistoidesConspicillum,
+        BermudaBlueAngelfish,
+        DiodonHolocanthus,
+        ParacanthurusHepatus,
+        PomacanthusImperator,
+        PterapogonKauderni,
+        SargocentronCoruscum,
+        Symphysodon,
+        ZanclusCornutus
     }
 
     public class FishComparer : IComparer<Fish>

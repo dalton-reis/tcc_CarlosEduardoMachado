@@ -55,7 +55,7 @@ public class EggFish : MonoBehaviour
 
     public bool fertilize(Fish fish)
     {
-        if (state == EggState.Layed && fish.gender == Gender.male)
+        if (state == EggState.Layed && fish.gender == Gender.male && fish.specie == mother.specie)
         {
             state = EggState.Fertilized;
             father = fish;

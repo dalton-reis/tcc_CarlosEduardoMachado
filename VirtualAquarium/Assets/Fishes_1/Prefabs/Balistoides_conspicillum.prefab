@@ -134,6 +134,7 @@ MonoBehaviour:
   state: 0
   lastState: 0
   gender: 0
+  specie: 1
   fishArea: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   camerap: {fileID: 0}
@@ -150,6 +151,7 @@ MonoBehaviour:
   distanceFromTarget: 0
   distanceFromFood: 0
   heuristic: {x: 0, y: 0, z: 0}
+  totalReward: 0
 --- !u!114 &8550966572081009984
 MonoBehaviour:
   m_ObjectHideFlags: 0

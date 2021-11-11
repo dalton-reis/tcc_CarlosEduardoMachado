@@ -56,13 +56,6 @@ public class FishArea : MonoBehaviour
 
     public void Update()
     {
-        int antes = fishes.Count;
-        fishes = new List<Fish>(GameObject.FindObjectsOfType<Fish>());
-        if (antes != fishes.Count)
-        {
-            InitializeAllFishes();
-        }
-
         if (Input.GetKeyDown(KeyCode.Space) && AquariumProperties.foodAvailable > 0)
         {
             AquariumProperties.foodAvailable--;

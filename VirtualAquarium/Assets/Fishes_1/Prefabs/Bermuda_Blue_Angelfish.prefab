@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 680845888741870099}
   - component: {fileID: 942399766175919607}
   m_Layer: 0
-  m_Name: 'Bermuda_Blue_Angelfish '
+  m_Name: Bermuda_Blue_Angelfish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -410,6 +410,7 @@ MonoBehaviour:
   state: 0
   lastState: 0
   gender: 0
+  specie: 2
   fishArea: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   camerap: {fileID: 0}
@@ -426,6 +427,7 @@ MonoBehaviour:
   distanceFromTarget: 0
   distanceFromFood: 0
   heuristic: {x: 0, y: 0, z: 0}
+  totalReward: 0
 --- !u!114 &-9027356342520693267
 MonoBehaviour:
   m_ObjectHideFlags: 0
