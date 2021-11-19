@@ -58,22 +58,7 @@ namespace Unity.MLAgentsExamples
 
             GameObject.FindObjectOfType<GameController>().Simulador = true;
 
-            AquariumProperties.currentTimeSpeed = AquariumProperties.TimeSpeed.Slow;
-            switch (AquariumProperties.currentTimeSpeed)
-            {
-                case AquariumProperties.TimeSpeed.Fast:
-                    AquariumProperties.timeSpeedMultiplier = 30;
-                    break;
-                case AquariumProperties.TimeSpeed.Normal:
-                    AquariumProperties.timeSpeedMultiplier = 60;
-                    break;
-                case AquariumProperties.TimeSpeed.Slow:
-                    AquariumProperties.timeSpeedMultiplier = 120;
-                    break;
-                case AquariumProperties.TimeSpeed.RealTime:
-                    AquariumProperties.timeSpeedMultiplier = 3600;
-                    break;
-            }
+            AquariumProperties.CurrentTimeSpeed = AquariumProperties.TimeSpeed.Slow;
         }
 
         public void OnDestroy()

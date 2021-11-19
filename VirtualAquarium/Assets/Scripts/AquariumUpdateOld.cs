@@ -111,11 +111,11 @@ public class AquariumUpdateOld : MonoBehaviour
 
         if (AquariumProperties.configs != null)
         {
-            AquariumProperties.currentTimeSpeed = (AquariumProperties.TimeSpeed)AquariumProperties.configs.timeSpeed;
+            AquariumProperties.CurrentTimeSpeed = (AquariumProperties.TimeSpeed)AquariumProperties.configs.timeSpeed;
         }
         else
         {
-            AquariumProperties.currentTimeSpeed = AquariumProperties.TimeSpeed.Normal;
+            AquariumProperties.CurrentTimeSpeed = AquariumProperties.TimeSpeed.Normal;
         }
         AquariumProperties.aquariumTemperature = 25.0f;
         AquariumProperties.externalTemperature = 25.0f;
@@ -125,21 +125,6 @@ public class AquariumUpdateOld : MonoBehaviour
         AquariumProperties.currentWheater = AquariumProperties.Wheater.Sun;
         AquariumProperties.aquariumHour = DateTime.ParseExact("08:00", DEFAULT_HOUR_MASK, CultureInfo.InvariantCulture);
         lastFoodHour = DateTime.ParseExact("08:00", DEFAULT_HOUR_MASK, CultureInfo.InvariantCulture);
-        switch (AquariumProperties.currentTimeSpeed)
-        {
-            case AquariumProperties.TimeSpeed.Fast:
-                AquariumProperties.timeSpeedMultiplier = 30;
-                break;
-            case AquariumProperties.TimeSpeed.Normal:
-                AquariumProperties.timeSpeedMultiplier = 60;
-                break;
-            case AquariumProperties.TimeSpeed.Slow:
-                AquariumProperties.timeSpeedMultiplier = 120;
-                break;
-            case AquariumProperties.TimeSpeed.RealTime:
-                AquariumProperties.timeSpeedMultiplier = 3600;
-                break;
-        }
     }
 
     private void changeLight(float intensity)
@@ -180,7 +165,7 @@ public class AquariumUpdateOld : MonoBehaviour
     void updateTime()
     {
         accumulatedTime += Time.deltaTime;
-        if (AquariumProperties.currentTimeSpeed != AquariumProperties.TimeSpeed.RealTime)
+        if (AquariumProperties.CurrentTimeSpeed != AquariumProperties.TimeSpeed.RealTime)
         {
             if (accumulatedTime >= AquariumProperties.timeSpeedMultiplier)
             {
@@ -337,7 +322,7 @@ public class AquariumUpdateOld : MonoBehaviour
         float heaterAquariumDiff = AquariumProperties.heaterTemperature - AquariumProperties.aquariumTemperature;
         float externalAquariumDiff = AquariumProperties.externalTemperature - AquariumProperties.aquariumTemperature;
         float timeCoefficient = 0;
-        switch (AquariumProperties.currentTimeSpeed)
+        switch (AquariumProperties.CurrentTimeSpeed)
         {
             case AquariumProperties.TimeSpeed.Fast:
                 timeCoefficient = 150;

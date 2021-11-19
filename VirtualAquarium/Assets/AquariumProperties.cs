@@ -15,7 +15,7 @@ public class AquariumProperties : ScriptableObject {
     public static float foodAvailable;
     public static Wheater currentWheater;
     public static DateTime aquariumHour;
-    public static TimeSpeed currentTimeSpeed;
+    private static TimeSpeed currentTimeSpeed;
     public static float timeSpeedMultiplier;
     public static float lifeLostPerHour = 20.0f;
     public static float temperatureCoefficient;
@@ -28,9 +28,32 @@ public class AquariumProperties : ScriptableObject {
     public static float MAX_LIGHT_SUPPORTED = 2.0f;
     public static ConfigProperties configs;
     public static IUTConnect conn;
+
+    public static TimeSpeed CurrentTimeSpeed { get => currentTimeSpeed; set {
+            currentTimeSpeed = value;
+            switch (currentTimeSpeed)
+            {
+                case TimeSpeed.RealTime:
+                    timeSpeedMultiplier = 3600;
+                    break;
+                case TimeSpeed.Slow:
+                    timeSpeedMultiplier = 120;
+                    break;
+                case TimeSpeed.Normal:
+                    timeSpeedMultiplier = 60;
+                    break;
+                case TimeSpeed.Fast:
+                    timeSpeedMultiplier = 30;
+                    break;
+                case TimeSpeed.SuperFast:
+                    timeSpeedMultiplier = 10;
+                    break;
+            }
+        } }
+
     public enum TimeSpeed
     {
-        Slow = 0, Normal = 1, Fast = 2, RealTime = 3
+        RealTime = 0, Slow = 1, Normal = 2, Fast = 3, SuperFast = 4
     }
     public enum Wheater
     {

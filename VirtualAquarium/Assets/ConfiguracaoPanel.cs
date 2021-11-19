@@ -30,16 +30,19 @@ public class ConfiguracaoPanel : MonoBehaviour {
         switch (value)
         {
             case 0:
-                speedText.text = "Lento";
+                speedText.text = "Tempo Real";
                 break;
             case 1:
-                speedText.text = "Normal";
+                speedText.text = "x30";
                 break;
             case 2:
-                speedText.text = "Rápido";
+                speedText.text = "x60";
                 break;
             case 3:
-                speedText.text = "Tempo Real";
+                speedText.text = "x120";
+                break;
+            case 4:
+                speedText.text = "x360";
                 break;
         }
 	}
