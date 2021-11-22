@@ -17,4 +17,19 @@ public class FishReproductionFemale : FishReproduction
     public FishReproductionFemale(Fish fish) : base(fish)
     {
     }
+
+    public override string getLetterIndentify()
+    {
+        return "F";
+    }
+    public override Color getLetterIndentifyColor()
+    {
+        return Color.magenta;
+    }
+
+    public override void Reset()
+    {
+        base.Reset();
+        timeSinceReproduction = 0;
+    }
 }

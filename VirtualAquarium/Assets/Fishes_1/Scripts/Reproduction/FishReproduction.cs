@@ -20,4 +20,18 @@ public abstract class FishReproduction
     {
         this.fish = fish;
     }
+
+    public virtual string getLetterIndentify()
+    {
+        return "";
+    }
+
+    public virtual Color getLetterIndentifyColor()
+    {
+        return Color.white;
+    }
+
+    public virtual void Reset()
+    {
+    }
 }

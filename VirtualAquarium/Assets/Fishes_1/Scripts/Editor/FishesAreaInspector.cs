@@ -19,6 +19,7 @@ public class FishesAreaInspector : Editor
         SerializedProperty particleFood = serializedObject.FindProperty("particleFood");
         SerializedProperty feedPoint = serializedObject.FindProperty("feedPoint");
         SerializedProperty eggFish = serializedObject.FindProperty("eggFish");
+        SerializedProperty fishesInformation = serializedObject.FindProperty("fishesInformation");
         SerializedProperty bounds = serializedObject.FindProperty("bounds");
 
         EditorGUI.BeginChangeCheck();
@@ -28,6 +29,7 @@ public class FishesAreaInspector : Editor
         EditorGUILayout.PropertyField(particleFood, true);
         EditorGUILayout.PropertyField(feedPoint, true);
         EditorGUILayout.PropertyField(eggFish, true);
+        EditorGUILayout.PropertyField(fishesInformation, true);
         EditorGUILayout.PropertyField(bounds, true);
 
         EditorGUILayout.PropertyField(raycastDistance, true);

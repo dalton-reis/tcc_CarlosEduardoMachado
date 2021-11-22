@@ -13,11 +13,12 @@ public class Fish : Agent
 {
     Animator animator;
     float timer;
-    public FStates state;
+    [SerializeField]
+    private FStates state;
     public FStates lastState;
     public Gender gender = Gender.random;
     public Specie specie;
-    private FishReproduction fishReproduction;
+    public FishReproduction fishReproduction;
     List<Transform> playersAround = new List<Transform>();
     public FishArea fishArea;
     public Vector3 target;
@@ -28,6 +29,7 @@ public class Fish : Agent
     private float eatRadius = 3f;
     private Bounds bounds;
     private Vector3 rotateTarget, position, direction, velocity;
+    public FishInformation fishInformation;
 
     public List<Camera> cameras;
 
@@ -53,9 +55,6 @@ public class Fish : Agent
     [System.NonSerialized]
     public float changeTarget = 0f, changeAnim = 0f, timeSinceTarget = 0f, timeSinceAnim = 0f, prevAnim, currentAnim = 0f, prevSpeed, speed, zturn, prevz,
     turnSpeedBackup;
-    private Quaternion lookRotation;
-
-    private float rechargingEnergy;
 
     private Vector3 startScale;
 
@@ -91,6 +90,15 @@ public class Fish : Agent
     public float MinLightSupported = 1.0f;
     public float MaxLightSupported = 2.0f;
 
+    public FStates State
+    {
+        get => state; set
+        {
+            lastState = state;
+            state = value;
+        }
+    }
+
     public class FishComparer : IComparer<Fish>
     {
         public int Compare(Fish x, Fish y)
@@ -108,13 +116,14 @@ public class Fish : Agent
     {
         life = 100;
         energy = 100;
+        turnSpeedBackup = turnSpeed;
 
         if (!gameController)
             gameController = GameObject.FindObjectOfType<GameController>();
         fishArea = GameObject.FindObjectOfType<FishArea>();
         rigidbody = GetComponent<Rigidbody>();
         bounds = fishArea.bounds;
-        state = FStates.Stay;
+        State = FStates.Stay;
 
 
         if (gameController.multi)
@@ -161,16 +170,16 @@ public class Fish : Agent
         {
             if (fishReproduction.Reproduce())
             {
-                AddReward(10f / MaxStep);
+                AddReward(0.5f);
             } else
             {
                 AddReward(-0.1f / MaxStep);
             }
         }
         
-        if (state == FStates.Stay && HasEnergy())
+        if (State == FStates.Stay && HasEnergy())
         {
-            state = FStates.Patrol;
+            State = FStates.Patrol;
             if (GetComponent<BehaviorParameters>().BehaviorType != BehaviorType.HeuristicOnly)
                 heuristic = new Vector3(vectorAction[0], vectorAction[1], vectorAction[2]);
             target = new Vector3(vectorAction[0] * fishArea.bounds.size.x / 2 * 0.9f,
@@ -178,7 +187,7 @@ public class Fish : Agent
                                  vectorAction[2] * fishArea.bounds.size.z / 2 * 0.9f) + fishArea.transform.position;
             //Debug.Log(string.Join("|", new List<float>(vectorAction).ConvertAll<string>((value) => value.ToString()).ToArray()));
             //Debug.Log("y" + target.y);
-            if (Vector3.Magnitude(target - rigidbody.position) < 5)
+            if (Vector3.Magnitude(target - rigidbody.position) < 3)
             {
                 AddReward(-0.1f);
             }
@@ -196,7 +205,9 @@ public class Fish : Agent
             energy = UnityEngine.Random.Range(50, 100);
 
             transform.position = fishArea.GetRandomPoint();
-            state = FStates.Stay;
+            State = FStates.Stay;
+
+            AquariumProperties.CurrentTimeSpeed = (AquariumProperties.TimeSpeed) UnityEngine.Random.Range(0, 4);
 
             while (fishArea.feedPoint.foods.Count > 0)
                 fishArea.removeFood();
@@ -204,7 +215,10 @@ public class Fish : Agent
             fishArea.removeEggs();
             fishArea.mixStaticFishPositions();
 
-            fishArea.particleFood.Play();
+            if (!fishArea.particleFood.isPlaying)
+                fishArea.particleFood.Play();
+
+            fishReproduction?.Reset();
         }
     }
 
@@ -212,9 +226,10 @@ public class Fish : Agent
     {
         sensor.AddObservation(transform.forward);
         sensor.AddObservation((int) life);
-        sensor.AddObservation((int) state);
+        sensor.AddObservation((int) State);
         sensor.AddObservation((int) distanceFromFood);
         sensor.AddObservation((int) gender);
+        sensor.AddObservation((int) AquariumProperties.CurrentTimeSpeed);
     }
 
     private bool IsLowLife()
@@ -253,12 +268,11 @@ public class Fish : Agent
                 }
             }
         }
-
     }
 
     private void lifeUpdate()
     {
-        if (state != FStates.Die)
+        if (State != FStates.Die)
         {
             lifeTime += Time.deltaTime;
             timeSinceFeed += Time.deltaTime;
@@ -270,6 +284,11 @@ public class Fish : Agent
                     AddReward(10f / MaxStep);
                 else
                     AddReward(100f / MaxStep);
+
+                if (playersAround.Count > 0)
+                {
+                    AddReward(-100f / MaxStep);
+                }
 
 
                 if (lifeTime >= 1)
@@ -296,11 +315,11 @@ public class Fish : Agent
             }
             else if (life <= 0)
             {
-                target = new Vector3(transform.position.x, fishArea.transform.position.y + 2.3f, 0);
+                target = new Vector3(transform.position.x, 70f, transform.position.z);
                 if (animator)
                     animator.speed = 0.2f;
-                lastState = state;
-                state = FStates.Die;
+                State = FStates.Die;
+                ResetVelocity();
             }
         }
     }
@@ -314,28 +333,25 @@ public class Fish : Agent
             distanceFromFood = Vector3.Distance(transform.position, food.transform.position);
             if (Vector3.Distance(transform.position, food.transform.position) < eatRadius)
             {
-                mutexFeed.WaitOne();
-                if (timeSinceFeed >= 10)
-                {
-                    timeSinceFeed = 0;
-                    Debug.Log("Comeu");
-
-                    if (IsLowLife()) AddReward(1f);
-                    else if (!IsSuperLife()) AddReward(0.01f);
-
-                    life += UnityEngine.Random.Range(15, 30);
-                }
-                mutexFeed.ReleaseMutex();
+                goToFeed(food);
             }
 
         }
     }
 
+    internal void goToFeed(GameObject food)
+    {
+        State = FStates.Feed;
+        target = new Vector3(food.transform.position.x, food.transform.position.y, food.transform.position.z);
+    }
+
     void Die()
     {
+        if (!gameController)
+            gameController = GameObject.FindObjectOfType<GameController>();
         if (gameController.Simulador)
         {
-            AddReward(-300f);
+            AddReward(-100f);
             EndEpisode();
             return;
         }
@@ -346,6 +362,10 @@ public class Fish : Agent
             transform.Rotate(0, 0, 2);
             totalRotate += 2;
         }
+        if (fishInformation)
+        {
+            Destroy(fishInformation);
+        }
         if (transform.position == target && deadTime > 25)
         {
             gameObject.SetActive(false);
@@ -353,14 +373,6 @@ public class Fish : Agent
         }
 
 
-    }
-
-    private bool CheckValidPosition(Vector3 _positionToCheck)
-    {
-        if (_positionToCheck.x < bounds.min.x || _positionToCheck.x > bounds.max.x) { return false; }
-        if (_positionToCheck.y < bounds.min.y || _positionToCheck.y > bounds.max.y) { return false; }
-        if (_positionToCheck.z < bounds.min.z || _positionToCheck.z > bounds.max.z) { return false; }
-        return true;
     }
 
     void Patrol()
@@ -373,22 +385,18 @@ public class Fish : Agent
         {
             if (turnSpeed != 10f && rigidbody.velocity.magnitude != 0f)
             {
-                turnSpeedBackup = turnSpeed;
                 turnSpeed = 10f;
             }
-            else if (distanceFromTarget <= 0.5f)
+            else if ((distanceFromTarget <= 0.5f && State != FStates.Feed) || (distanceFromTarget <= 0.1f))
             {
-                rigidbody.velocity = Vector3.zero;
-                turnSpeed = turnSpeedBackup;
+                ResetVelocity();
 
-                lastState = state;
-                state = FStates.Stay;
-                //AddReward(-1f);
+                State = FStates.Stay;
                 return;
             }
         }
-        if (rigidbody.transform.position.y < bounds.min.y + 1f ||
-            rigidbody.transform.position.y > bounds.max.y - 1f)
+        if ((rigidbody.transform.position.y < bounds.min.y + 1f ||
+            rigidbody.transform.position.y > bounds.max.y - 1f))
         {
             if (rigidbody.transform.position.y < bounds.center.x + 1f) rotateTarget.y = 0.1f; else rotateTarget.y = -0.1f;
         }
@@ -408,7 +416,7 @@ public class Fish : Agent
         direction = Quaternion.Euler(transform.eulerAngles) * Vector3.forward;
         rigidbody.velocity = Mathf.Lerp(prevSpeed, moveSpeed, Mathf.Clamp(timeSinceAnim / 3, 0f, 1f)) * direction;
         // Hard-limit the height, in case the limit is breached despite of the turnaround attempt
-        if (rigidbody.transform.position.y < bounds.min.y || rigidbody.transform.position.y > bounds.max.y)
+        if ((rigidbody.transform.position.y < bounds.min.y || rigidbody.transform.position.y > bounds.max.y) && State != FStates.Feed)
         {
             position = rigidbody.transform.position;
             position.y = Mathf.Clamp(position.y, bounds.min.y, bounds.max.y);
@@ -416,13 +424,18 @@ public class Fish : Agent
         }
     }
 
+    private void ResetVelocity()
+    {
+        if (rigidbody)
+            rigidbody.velocity = Vector3.zero;
+        turnSpeed = turnSpeedBackup;
+    }
+
     // Select a new animation speed randomly
     private float ChangeAnim(float currentAnim)
     {
         return 0;
     }
-
-    // Select a new direction to fly in randomly
 
     void SwimAway()
     {
@@ -446,7 +459,7 @@ public class Fish : Agent
     {
         timer -= Time.deltaTime;
         lifeUpdate();
-        switch (state)
+        switch (State)
         {
             case FStates.Patrol:
                 Patrol();
@@ -459,7 +472,7 @@ public class Fish : Agent
                 SwimAway();
                 break;
             case FStates.Feed:
-                //Feed();
+                Patrol();
                 break;
             case FStates.Die:
                 Die();
@@ -475,8 +488,7 @@ public class Fish : Agent
     internal void Initialize(FishArea fishArea, bool newChildren)
     {
         fishArea = GameObject.FindObjectOfType<FishArea>();
-        lastState = state;
-        state = FStates.Patrol;
+        State = FStates.Patrol;
         this.iniciado = true;
         this.fishArea = fishArea;
         animator = GetComponent<Animator>();
@@ -490,8 +502,10 @@ public class Fish : Agent
 
         if (newChildren)
         {
-            transform.localScale *= 0.1f;
+            transform.localScale *= 0.2f;
         }
+
+        fishArea.fishesInformation?.AddFishInformation(this);
     }
 
     public void AddPlayer(Transform t)
@@ -506,15 +520,34 @@ public class Fish : Agent
 
     public void OnTriggerEnter(Collider other)
     {
-        /*
-        if (other.tag == "Player" && state != FStates.Feed)
+        
+        if (other.tag == "Player" && State != FStates.Feed)
         {
             AddPlayer(other.transform);
-            lastState = state;
-            state = FStates.SwimAway;
-            animator?.SetInteger("State", 1);
-            //AddReward(-0.01f);
-        }*/
+        }
+        else if (other.tag == "Food" && State == FStates.Feed)
+        {
+            mutexFeed.WaitOne();
+            if (timeSinceFeed >= 5)
+            {
+                timeSinceFeed = 0;
+                Debug.Log("Comeu");
+
+                if (IsLowLife()) AddReward(1f);
+                else if (!IsSuperLife()) AddReward(0.01f);
+                else if (IsSuperLife()) AddReward(-0.01f);
+
+                life += UnityEngine.Random.Range(15, 30);
+                fishArea.removeFood(other.gameObject);
+
+                if (!fishArea.particleFood.isPlaying && fishArea.feedPoint.foods.Count == 0 && gameController.Simulador)
+                    fishArea.particleFood.Play();
+
+                ResetVelocity();
+                State = FStates.Stay;
+            }
+            mutexFeed.ReleaseMutex();
+        }
     }
 
     public void OnTriggerExit(Collider other)
@@ -522,12 +555,6 @@ public class Fish : Agent
         if (other.tag == "Player")
         {
             RemovePlayer(other.transform);
-            if (playersAround.Count == 0)
-            {
-                lastState = state;
-                state = FStates.Stay;
-                RequestAction();
-            }
         }
     }
 

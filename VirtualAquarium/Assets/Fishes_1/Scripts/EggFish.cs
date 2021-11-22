@@ -21,6 +21,7 @@ public class EggFish : MonoBehaviour
             {
                 rigidbody.useGravity = false;
                 rigidbody.velocity = Vector3.zero;
+                rigidbody.angularVelocity = Vector3.zero;
                 GetComponent<SphereCollider>().isTrigger = false;
             }
         }

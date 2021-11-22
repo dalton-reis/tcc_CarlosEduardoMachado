@@ -18,4 +18,14 @@ public class FishReproductionMale : FishReproduction
     public FishReproductionMale(Fish fish): base(fish)
     {
     }
+
+    public override string getLetterIndentify()
+    {
+        return "M";
+    }
+
+    public override Color getLetterIndentifyColor()
+    {
+        return Color.cyan;
+    }
 }

@@ -20,6 +20,8 @@ public class AquariumUpdateOld : MonoBehaviour
     public Text externalTemperatureText;
     public Text heaterTemperatureText;
     public Text periodText;
+    public Button fishHealthText;
+    public GameObject fishesInformation;
     public RawImage wheaterImage;
     public Light directionalLight;
     private float accumulatedTime;
@@ -96,6 +98,8 @@ public class AquariumUpdateOld : MonoBehaviour
             AquariumProperties.conn.OnReceive += socketCallback;
         }
 
+        fishHealthText.onClick.AddListener(fishHealthTextClick);
+
         foodIcon.enabled = gameController.interativa;
         if (gameController.interativa)
         {
@@ -125,6 +129,11 @@ public class AquariumUpdateOld : MonoBehaviour
         AquariumProperties.currentWheater = AquariumProperties.Wheater.Sun;
         AquariumProperties.aquariumHour = DateTime.ParseExact("08:00", DEFAULT_HOUR_MASK, CultureInfo.InvariantCulture);
         lastFoodHour = DateTime.ParseExact("08:00", DEFAULT_HOUR_MASK, CultureInfo.InvariantCulture);
+    }
+
+    private void fishHealthTextClick()
+    {
+        fishesInformation.SetActive(!fishesInformation.activeSelf);
     }
 
     private void changeLight(float intensity)

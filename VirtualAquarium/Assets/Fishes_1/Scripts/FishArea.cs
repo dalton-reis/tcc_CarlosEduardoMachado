@@ -13,6 +13,9 @@ public class FishArea : MonoBehaviour
     public FoodPoint feedPoint;
     public ParticleSystem particleFood;
     public Bounds bounds;
+    public FishesInformation fishesInformation;
+    private Fish selectedFish;
+    private Material selectedFishMaterial;
 
     public int Count
     {
@@ -27,6 +30,23 @@ public class FishArea : MonoBehaviour
                 count = value;
                 SpawnFishes();
                 transform.hasChanged = false;
+            }
+        }
+    }
+
+    public Fish SelectedFish
+    {
+        get => selectedFish; set
+        {
+            if (selectedFish != null)
+            {
+                selectedFish.GetComponentInChildren<SkinnedMeshRenderer>().material = selectedFishMaterial;
+            }
+            selectedFish = value;
+            if (selectedFish != null)
+            {
+                selectedFishMaterial = selectedFish.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial;
+                selectedFish.GetComponentInChildren<SkinnedMeshRenderer>().material = fishesInformation.selectFishMaterial;
             }
         }
     }
@@ -49,6 +69,7 @@ public class FishArea : MonoBehaviour
         fishes = new List<Fish>(GameObject.FindObjectsOfType<Fish>());
         fishesOrderByFood = new List<Fish>(fishes);
 
+        fishesInformation?.AddFishInformation(null);
         SpawnFishes();
         InitializeAllFishes();
 
@@ -85,7 +106,7 @@ public class FishArea : MonoBehaviour
         max = center + bounds.size / 2f;
         min = center - bounds.size / 2f;
         if (fishes.Count < count)
-            for (int i = fishes.Count; i < count; i++)
+            for (int i = fishes.Count; i < count / 2; i++)
                 SpawnFish();
         else
         if (fishes.Count > count)
@@ -136,9 +157,11 @@ public class FishArea : MonoBehaviour
     {
         GameObject fish = Instantiate(GetRandomPrefab());
         fish.transform.parent = transform;
+        fish.GetComponent<Fish>().gender = Gender.male;
 
-
-
+        fish = Instantiate(GetRandomPrefab());
+        fish.transform.parent = transform;
+        fish.GetComponent<Fish>().gender = Gender.female;
     }
 
     public void MixPositions()
@@ -180,6 +203,7 @@ public class FishArea : MonoBehaviour
         if (feedPoint.foods.Contains(obj))
         {
             feedPoint.removeFood();
+            Destroy(obj);
             feedPoint.foods.Remove(obj);
         }
     }
@@ -188,7 +212,7 @@ public class FishArea : MonoBehaviour
     {
         for (int i = 0; i < fishesOrderByFood.Count; i++)
         {
-            if (fishesOrderByFood[i].state == Fish.FStates.Feed)
+            if (fishesOrderByFood[i].State == Fish.FStates.Feed)
             {
 
                 return true;

@@ -131,7 +131,6 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 50000
-  state: 0
   lastState: 0
   gender: 0
   specie: 1
@@ -140,6 +139,7 @@ MonoBehaviour:
   camerap: {fileID: 0}
   moveSpeed: 2
   turnSpeed: 3
+  fishInformation: {fileID: 0}
   cameras: []
   id: 
   identity: {fileID: 0}
@@ -152,6 +152,13 @@ MonoBehaviour:
   distanceFromFood: 0
   heuristic: {x: 0, y: 0, z: 0}
   totalReward: 0
+  lossLifeCoefficient: 0
+  MaxTemperatureSupported: 25.5
+  MinTemperatureSupported: 22.5
+  MinLightSupportedNight: 0
+  MaxLightSupportedNight: 1
+  MinLightSupported: 1
+  MaxLightSupported: 2
 --- !u!114 &8550966572081009984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 7
+    VectorObservationSize: 8
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 3
