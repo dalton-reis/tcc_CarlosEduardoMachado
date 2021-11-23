@@ -212,7 +212,11 @@ public class AquariumUpdateOld : MonoBehaviour
             }
 
         }
-        if (countFishes > 0)
+        if (fishArea.SelectedFish && fishArea.SelectedFish.gameObject.activeSelf)
+        {
+            healthSlider.value = fishArea.SelectedFish.life * 0.01f;
+        }
+        else if(countFishes > 0)
         {
             AquariumProperties.aquariumHealth = totalLife / countFishes;
             if (gameController.multi)

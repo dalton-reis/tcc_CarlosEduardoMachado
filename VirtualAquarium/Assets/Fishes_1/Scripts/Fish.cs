@@ -320,6 +320,7 @@ public class Fish : Agent
                     animator.speed = 0.2f;
                 State = FStates.Die;
                 ResetVelocity();
+                fishArea.fishesInformation?.RemoveFishInformation(fishInformation.gameObject);
             }
         }
     }
@@ -362,10 +363,7 @@ public class Fish : Agent
             transform.Rotate(0, 0, 2);
             totalRotate += 2;
         }
-        if (fishInformation)
-        {
-            Destroy(fishInformation);
-        }
+
         if (transform.position == target && deadTime > 25)
         {
             gameObject.SetActive(false);
@@ -428,7 +426,8 @@ public class Fish : Agent
     {
         if (rigidbody)
             rigidbody.velocity = Vector3.zero;
-        turnSpeed = turnSpeedBackup;
+        if (turnSpeedBackup > 0)
+          turnSpeed = turnSpeedBackup;
     }
 
     // Select a new animation speed randomly

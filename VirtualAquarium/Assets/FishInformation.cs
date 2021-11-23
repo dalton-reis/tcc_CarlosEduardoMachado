@@ -26,6 +26,7 @@ public class FishInformation : MonoBehaviour
                 if (Fish.fishReproduction != null)
                     TextFishGender.color = Fish.fishReproduction.getLetterIndentifyColor();
                 TextFishName.text = Fish.specie.ToString();
+                fish.fishInformation = this;
             }
             else
             {

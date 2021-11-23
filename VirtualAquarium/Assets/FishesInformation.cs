@@ -37,7 +37,7 @@ public class FishesInformation : MonoBehaviour
         RectTransform = gameObject.GetComponent<RectTransform>();
         GameObject fishInformation = Instantiate(fishInformationPrefab, transform);
         RectTransform rectTransformFish = fishInformation.GetComponent<RectTransform>();
-        rectTransformFish.Translate(new Vector3(0, -(list.Count * rectTransformFish.sizeDelta.y)));
+        rectTransformFish.anchoredPosition = new Vector2(0, -10 - (list.Count * rectTransformFish.sizeDelta.y));
         list.Add(fishInformation);
         fishInformation.GetComponent<FishInformation>().Fish = fish;
         RectTransform.sizeDelta.Set(RectTransform.sizeDelta.x, RectTransform.sizeDelta.y + rectTransformFish.sizeDelta.y);
@@ -56,7 +56,7 @@ public class FishesInformation : MonoBehaviour
         for (int i = 0; i < list.Count; i++)
         {
             RectTransform rectTransformFish = list[i].GetComponent<RectTransform>();
-            rectTransformFish.position = new Vector3(0, -10 - (i * rectTransformFish.sizeDelta.y));
+            rectTransformFish.anchoredPosition = new Vector2(0, -10 - (i * rectTransformFish.sizeDelta.y));
             RectTransform.sizeDelta.Set(RectTransform.sizeDelta.x, RectTransform.sizeDelta.y + rectTransformFish.sizeDelta.y);
         }
     }
