@@ -7249,6 +7249,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FishMale (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1700719407107935413, guid: 5d6e836585b548742a31c5183b241d1c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1700719407107935418, guid: 5d6e836585b548742a31c5183b241d1c,
         type: 3}
       propertyPath: m_RootOrder
@@ -9839,6 +9844,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FishFemale (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1700719407107935413, guid: 5d6e836585b548742a31c5183b241d1c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1700719407107935418, guid: 5d6e836585b548742a31c5183b241d1c,
         type: 3}
       propertyPath: m_RootOrder
@@ -12354,6 +12364,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FishMale (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1700719407107935413, guid: 5d6e836585b548742a31c5183b241d1c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1700719407107935418, guid: 5d6e836585b548742a31c5183b241d1c,
         type: 3}
       propertyPath: m_RootOrder
@@ -12770,7 +12785,7 @@ MonoBehaviour:
   particleFood: {fileID: 1939820014}
   bounds:
     m_Center: {x: 0.3610001, y: 5.4, z: 5.552}
-    m_Extent: {x: 10, y: 4.5, z: 5}
+    m_Extent: {x: 7, y: 3.5, z: 3}
   fishesInformation: {fileID: 0}
   fishes:
   - {fileID: 2002529097}
@@ -15820,7 +15835,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1631333083}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 4.89, z: 12.01}
+  m_LocalPosition: {x: 0, y: 4.89, z: 14.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -22753,6 +22768,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FishFemale (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1700719407107935413, guid: 5d6e836585b548742a31c5183b241d1c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1700719407107935418, guid: 5d6e836585b548742a31c5183b241d1c,
         type: 3}
       propertyPath: m_RootOrder
@@ -22938,6 +22958,11 @@ PrefabInstance:
       propertyPath: fishArea
       value: 
       objectReference: {fileID: 1177938168}
+    - target: {fileID: 1700719407107935420, guid: 5d6e836585b548742a31c5183b241d1c,
+        type: 3}
+      propertyPath: m_BehaviorType
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d6e836585b548742a31c5183b241d1c, type: 3}
 --- !u!4 &2002529096 stripped
@@ -23881,6 +23906,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FishFemale
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700719407107935413, guid: 5d6e836585b548742a31c5183b241d1c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1700719407107935418, guid: 5d6e836585b548742a31c5183b241d1c,
         type: 3}

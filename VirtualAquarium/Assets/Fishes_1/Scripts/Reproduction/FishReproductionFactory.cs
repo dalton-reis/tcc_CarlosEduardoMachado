@@ -1,17 +1,18 @@
-
-
-public class FishReproductionFactory
+namespace VirtualAquarium
 {
-    public static FishReproduction createFishReproduction(Fish fish) 
+    public class FishReproductionFactory
     {
-        switch (fish.gender)
+        public static FishReproduction createFishReproduction(Fish fish)
         {
-            case Gender.male:
-                return new FishReproductionMale(fish);
-            case Gender.female:
-                return new FishReproductionFemale(fish);
-            default:
-                return null;
+            switch (fish.gender)
+            {
+                case Gender.male:
+                    return new FishReproductionMale(fish);
+                case Gender.female:
+                    return new FishReproductionFemale(fish);
+                default:
+                    return null;
+            }
         }
     }
 }

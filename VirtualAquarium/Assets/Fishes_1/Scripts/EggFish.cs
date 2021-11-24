@@ -2,96 +2,101 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EggFish : MonoBehaviour
+namespace VirtualAquarium
 {
-
-    public EggState state = EggState.Layed;
-    public float timeSinceFertilized = 0;
-    public float timeSinceLayed = 0;
-    public Fish mother, father;
-
-    GameController gameController;
-
-    new private Rigidbody rigidbody;
-    public void OnTriggerEnter(Collider collision)
+    public class EggFish : MonoBehaviour
     {
-        if (collision.gameObject.tag == "Terrain")
+
+        public EggState state = EggState.Layed;
+        public float timeSinceFertilized = 0;
+        public float timeSinceLayed = 0;
+        public Fish mother, father;
+
+        GameController gameController;
+
+        new private Rigidbody rigidbody;
+        public void OnTriggerEnter(Collider collision)
         {
-            if (rigidbody)
+            if (collision.gameObject.tag == "Terrain")
             {
-                rigidbody.useGravity = false;
-                rigidbody.velocity = Vector3.zero;
-                rigidbody.angularVelocity = Vector3.zero;
-                GetComponent<SphereCollider>().isTrigger = false;
+                if (rigidbody)
+                {
+                    rigidbody.useGravity = false;
+                    rigidbody.velocity = Vector3.zero;
+                    rigidbody.angularVelocity = Vector3.zero;
+                    GetComponent<SphereCollider>().isTrigger = false;
+                    Debug.Log("Entrou terreno");
+                }
             }
         }
-    }
-    public enum EggState
-    {
-        Layed,
-        Fertilized,
-        Died,
-        Born
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        gameController = GameObject.FindObjectOfType<GameController>();
-        tag = "Egg";
-        rigidbody = GetComponentInChildren<Rigidbody>();
-       // rigidbody.AddForce(0, -1, 0);
-    }
-
-
-    public static bool layEgg(Fish fish)
-    {
-        if (fish.gender == Gender.female)
+        public enum EggState
         {
-            EggFish egg = Instantiate(fish.fishArea.eggFish, fish.transform.position, fish.transform.rotation, fish.fishArea.transform);
-            egg.mother = fish;
-            return true;
+            Layed,
+            Fertilized,
+            Died,
+            Born
         }
-        return false;
-    }
-
-    public bool fertilize(Fish fish)
-    {
-        if (state == EggState.Layed && fish.gender == Gender.male && fish.specie == mother.specie)
+        // Start is called before the first frame update
+        void Start()
         {
-            state = EggState.Fertilized;
-            father = fish;
-            return true;
+            gameController = GameObject.FindObjectOfType<GameController>();
+            tag = "Egg";
+            rigidbody = GetComponentInChildren<Rigidbody>();
+            // rigidbody.AddForce(0, -1, 0);
         }
-        return false;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (state == EggState.Fertilized)
+
+        public static bool layEgg(Fish fish)
         {
-            timeSinceFertilized += Time.deltaTime / AquariumProperties.timeSpeedMultiplier;
-
-            if (timeSinceFertilized > 100)
+            if (fish.gender == Gender.female)
             {
-                mother.AddReward(1f / mother.MaxStep);
-                father.AddReward(1f / mother.MaxStep);
-                
-                Fish newFish = Instantiate(mother, transform.position, transform.rotation, mother.fishArea.transform);
-                newFish.Initialize(mother.fishArea, true);
-
-                Destroy(gameObject, 1);
-                state = EggState.Born;
+                EggFish egg = Instantiate(fish.fishArea.eggFish, fish.transform.position, fish.transform.rotation, fish.fishArea.transform);
+                egg.mother = fish;
+                return true;
             }
-        } else if (state == EggState.Layed)
-        {
-            timeSinceLayed += Time.deltaTime / AquariumProperties.timeSpeedMultiplier;
-            if (timeSinceLayed > 100)
-            {
-                mother.AddReward(-1f / mother.MaxStep);
-                Destroy(gameObject, 1);
-            }
+            return false;
         }
-        
+
+        public bool fertilize(Fish fish)
+        {
+            if (state == EggState.Layed && fish.gender == Gender.male && fish.specie == mother.specie)
+            {
+                state = EggState.Fertilized;
+                father = fish;
+                return true;
+            }
+            return false;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (state == EggState.Fertilized)
+            {
+                timeSinceFertilized += Time.deltaTime / AquariumProperties.timeSpeedMultiplier;
+
+                if (timeSinceFertilized > 100)
+                {
+                    mother.AddReward(1f / mother.MaxStep);
+                    father.AddReward(1f / mother.MaxStep);
+
+                    Fish newFish = Instantiate(mother, transform.position, transform.rotation, mother.fishArea.transform);
+                    newFish.Initialize(mother.fishArea, true);
+
+                    Destroy(gameObject, 1);
+                    state = EggState.Born;
+                }
+            }
+            else if (state == EggState.Layed)
+            {
+                timeSinceLayed += Time.deltaTime / AquariumProperties.timeSpeedMultiplier;
+                if (timeSinceLayed > 100)
+                {
+                    mother.AddReward(-1f / mother.MaxStep);
+                    Destroy(gameObject, 1);
+                }
+            }
+
+        }
     }
 }

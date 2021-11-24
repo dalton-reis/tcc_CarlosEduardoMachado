@@ -2,30 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishReproductionMale : FishReproduction
+namespace VirtualAquarium
 {
-    public override bool Reproduce()
+    public class FishReproductionMale : FishReproduction
     {
-        foreach (EggFish egg in fish.fishArea.GetComponentsInChildren<EggFish>())
+        public override bool Reproduce()
         {
-            if (Vector3.Distance(fish.transform.position, egg.transform.position) < 4)
+            if (timeSinceReproduction == 0 || timeSinceReproduction + AquariumProperties.timeSpeedMultiplier * 4 <= Time.fixedTime)
             {
-                return egg.fertilize(fish);
+                timeSinceReproduction = Time.fixedTime;
+                foreach (EggFish egg in fish.fishArea.GetComponentsInChildren<EggFish>())
+                {
+                    if (Vector3.Distance(fish.transform.position, egg.transform.position) < 4)
+                    {
+                        return egg.fertilize(fish);
+                    }
+                }
             }
+            return false;
         }
-        return false;
-    }
-    public FishReproductionMale(Fish fish): base(fish)
-    {
-    }
+        public FishReproductionMale(Fish fish) : base(fish)
+        {
+        }
 
-    public override string getLetterIndentify()
-    {
-        return "M";
-    }
+        public override string getLetterIndentify()
+        {
+            return "M";
+        }
 
-    public override Color getLetterIndentifyColor()
-    {
-        return Color.cyan;
+        public override Color getLetterIndentifyColor()
+        {
+            return Color.cyan;
+        }
     }
 }

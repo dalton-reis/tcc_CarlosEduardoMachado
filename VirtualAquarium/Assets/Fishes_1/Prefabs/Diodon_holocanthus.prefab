@@ -345,6 +345,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 50000
+  state: 0
   lastState: 0
   gender: 0
   specie: 3
@@ -362,17 +363,21 @@ MonoBehaviour:
   life: 0
   energy: 0
   lifeTime: 0
+  totalLifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
   heuristic: {x: 0, y: 0, z: 0}
   totalReward: 0
+  SpawnTimeDays: 0
   lossLifeCoefficient: 0
-  MaxTemperatureSupported: 25.5
-  MinTemperatureSupported: 22.5
+  MaxTemperatureSupported: 27.8
+  MinTemperatureSupported: 23.9
   MinLightSupportedNight: 0
   MaxLightSupportedNight: 1
   MinLightSupported: 1
   MaxLightSupported: 2
+  MinSpawnTimeDays: 255
+  MaxSpawnTimeDays: 328
 --- !u!114 &-6315272600705849236
 MonoBehaviour:
   m_ObjectHideFlags: 0

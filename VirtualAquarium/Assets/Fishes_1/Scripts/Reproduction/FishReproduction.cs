@@ -1,37 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public enum Gender
+namespace VirtualAquarium
 {
-    random,
-    male,
-    female
-}
-public abstract class FishReproduction
-{
-    private Fish _fish;
-
-    public Fish fish { get => _fish; set => _fish = value; }
-
-    public abstract bool Reproduce();
-
-    public FishReproduction(Fish fish)
+    public enum Gender
     {
-        this.fish = fish;
+        random,
+        male,
+        female
     }
-
-    public virtual string getLetterIndentify()
+    public abstract class FishReproduction
     {
-        return "";
-    }
+        private Fish _fish;
+        protected float timeSinceReproduction = 0;
 
-    public virtual Color getLetterIndentifyColor()
-    {
-        return Color.white;
-    }
+        public Fish fish { get => _fish; set => _fish = value; }
 
-    public virtual void Reset()
-    {
+        public abstract bool Reproduce();
+
+        public FishReproduction(Fish fish)
+        {
+            this.fish = fish;
+        }
+
+        public virtual string getLetterIndentify()
+        {
+            return "";
+        }
+
+        public virtual Color getLetterIndentifyColor()
+        {
+            return Color.white;
+        }
+
+        public virtual void Reset()
+        {
+            timeSinceReproduction = 0;
+        }
     }
 }
