@@ -47,9 +47,12 @@ namespace VirtualAquarium
 
         public void RemoveFishInformation(GameObject gameObject)
         {
-            list.Remove(gameObject);
-            Destroy(gameObject);
-            RearrangeFishInformation();
+            if (list.Contains(gameObject))
+            {
+                list.Remove(gameObject);
+                Destroy(gameObject);
+                RearrangeFishInformation();
+            }
         }
 
         public void RearrangeFishInformation()

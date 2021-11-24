@@ -156,14 +156,20 @@ namespace VirtualAquarium
 
         public void SpawnFish()
         {
-            GameObject fish = Instantiate(GetRandomPrefab());
-            fish.transform.parent = transform;
-            fish.GetComponent<Fish>().gender = Gender.male;
-
-            fish = Instantiate(GetRandomPrefab());
-            fish.transform.parent = transform;
-            fish.GetComponent<Fish>().gender = Gender.female;
+            GameObject prefab = GetRandomPrefab();
+            SpawnFish(prefab, Gender.male);
+            SpawnFish(prefab, Gender.female);
         }
+
+        public GameObject SpawnFish(GameObject prefab, Gender gender)
+        {
+            GameObject fish = Instantiate(prefab);
+            fish.transform.parent = transform;
+            fish.GetComponent<Fish>().gender = gender;
+            fish.GetComponent<Fish>().prefab = prefab;
+            return fish;
+        }
+
 
         public void MixPositions()
         {

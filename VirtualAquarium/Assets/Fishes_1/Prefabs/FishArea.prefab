@@ -112,18 +112,30 @@ MonoBehaviour:
   camerap: {fileID: 0}
   moveSpeed: 0
   turnSpeed: 0
+  fishInformation: {fileID: 0}
   cameras: []
   id: 
   identity: {fileID: 0}
   iniciado: 0
   timeSinceFeed: 10
   life: 0
-  energy: 0
   lifeTime: 0
+  totalLifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
   heuristic: {x: 0, y: 0, z: 0}
   totalReward: 0
+  SpawnTimeDays: 0
+  prefab: {fileID: 0}
+  lossLifeCoefficient: 0
+  MaxTemperatureSupported: 25.5
+  MinTemperatureSupported: 22.5
+  MinLightSupportedNight: 0
+  MaxLightSupportedNight: 1
+  MinLightSupported: 1
+  MaxLightSupported: 2
+  MinSpawnTimeDays: 365
+  MaxSpawnTimeDays: 730
 --- !u!136 &136395892450574648
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1145,18 +1157,30 @@ MonoBehaviour:
   camerap: {fileID: 0}
   moveSpeed: 0
   turnSpeed: 0
+  fishInformation: {fileID: 0}
   cameras: []
   id: 
   identity: {fileID: 0}
   iniciado: 0
   timeSinceFeed: 10
   life: 0
-  energy: 0
   lifeTime: 0
+  totalLifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
   heuristic: {x: 0, y: 0, z: 0}
   totalReward: 0
+  SpawnTimeDays: 0
+  prefab: {fileID: 0}
+  lossLifeCoefficient: 0
+  MaxTemperatureSupported: 25.5
+  MinTemperatureSupported: 22.5
+  MinLightSupportedNight: 0
+  MaxLightSupportedNight: 1
+  MinLightSupported: 1
+  MaxLightSupported: 2
+  MinSpawnTimeDays: 365
+  MaxSpawnTimeDays: 730
 --- !u!136 &136917872660314512
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1556,18 +1580,30 @@ MonoBehaviour:
   camerap: {fileID: 0}
   moveSpeed: 0
   turnSpeed: 0
+  fishInformation: {fileID: 0}
   cameras: []
   id: 
   identity: {fileID: 0}
   iniciado: 0
   timeSinceFeed: 10
   life: 0
-  energy: 0
   lifeTime: 0
+  totalLifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
   heuristic: {x: 0, y: 0, z: 0}
   totalReward: 0
+  SpawnTimeDays: 0
+  prefab: {fileID: 0}
+  lossLifeCoefficient: 0
+  MaxTemperatureSupported: 25.5
+  MinTemperatureSupported: 22.5
+  MinLightSupportedNight: 0
+  MaxLightSupportedNight: 1
+  MinLightSupported: 1
+  MaxLightSupported: 2
+  MinSpawnTimeDays: 365
+  MaxSpawnTimeDays: 730
 --- !u!136 &136957184361727946
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1870,6 +1906,7 @@ MonoBehaviour:
   bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
+  fishesInformation: {fileID: 0}
   fishes: []
   eggFish: {fileID: 0}
 --- !u!1 &1355610994239106
@@ -2168,18 +2205,30 @@ MonoBehaviour:
   camerap: {fileID: 0}
   moveSpeed: 0
   turnSpeed: 0
+  fishInformation: {fileID: 0}
   cameras: []
   id: 
   identity: {fileID: 0}
   iniciado: 0
   timeSinceFeed: 10
   life: 0
-  energy: 0
   lifeTime: 0
+  totalLifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
   heuristic: {x: 0, y: 0, z: 0}
   totalReward: 0
+  SpawnTimeDays: 0
+  prefab: {fileID: 0}
+  lossLifeCoefficient: 0
+  MaxTemperatureSupported: 25.5
+  MinTemperatureSupported: 22.5
+  MinLightSupportedNight: 0
+  MaxLightSupportedNight: 1
+  MinLightSupported: 1
+  MaxLightSupported: 2
+  MinSpawnTimeDays: 365
+  MaxSpawnTimeDays: 730
 --- !u!136 &136469307918195748
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2366,18 +2415,30 @@ MonoBehaviour:
   camerap: {fileID: 0}
   moveSpeed: 0
   turnSpeed: 0
+  fishInformation: {fileID: 0}
   cameras: []
   id: 
   identity: {fileID: 0}
   iniciado: 0
   timeSinceFeed: 10
   life: 0
-  energy: 0
   lifeTime: 0
+  totalLifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
   heuristic: {x: 0, y: 0, z: 0}
   totalReward: 0
+  SpawnTimeDays: 0
+  prefab: {fileID: 0}
+  lossLifeCoefficient: 0
+  MaxTemperatureSupported: 25.5
+  MinTemperatureSupported: 22.5
+  MinLightSupportedNight: 0
+  MaxLightSupportedNight: 1
+  MinLightSupported: 1
+  MaxLightSupported: 2
+  MinSpawnTimeDays: 365
+  MaxSpawnTimeDays: 730
 --- !u!136 &136172932381369712
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2689,18 +2750,30 @@ MonoBehaviour:
   camerap: {fileID: 0}
   moveSpeed: 0
   turnSpeed: 0
+  fishInformation: {fileID: 0}
   cameras: []
   id: 
   identity: {fileID: 0}
   iniciado: 0
   timeSinceFeed: 10
   life: 0
-  energy: 0
   lifeTime: 0
+  totalLifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
   heuristic: {x: 0, y: 0, z: 0}
   totalReward: 0
+  SpawnTimeDays: 0
+  prefab: {fileID: 0}
+  lossLifeCoefficient: 0
+  MaxTemperatureSupported: 25.5
+  MinTemperatureSupported: 22.5
+  MinLightSupportedNight: 0
+  MaxLightSupportedNight: 1
+  MinLightSupported: 1
+  MaxLightSupported: 2
+  MinSpawnTimeDays: 365
+  MaxSpawnTimeDays: 730
 --- !u!136 &136459938761924436
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3072,18 +3145,30 @@ MonoBehaviour:
   camerap: {fileID: 0}
   moveSpeed: 0
   turnSpeed: 0
+  fishInformation: {fileID: 0}
   cameras: []
   id: 
   identity: {fileID: 0}
   iniciado: 0
   timeSinceFeed: 10
   life: 0
-  energy: 0
   lifeTime: 0
+  totalLifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
   heuristic: {x: 0, y: 0, z: 0}
   totalReward: 0
+  SpawnTimeDays: 0
+  prefab: {fileID: 0}
+  lossLifeCoefficient: 0
+  MaxTemperatureSupported: 25.5
+  MinTemperatureSupported: 22.5
+  MinLightSupportedNight: 0
+  MaxLightSupportedNight: 1
+  MinLightSupported: 1
+  MaxLightSupported: 2
+  MinSpawnTimeDays: 365
+  MaxSpawnTimeDays: 730
 --- !u!136 &136159266771520326
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3542,18 +3627,30 @@ MonoBehaviour:
   camerap: {fileID: 0}
   moveSpeed: 0
   turnSpeed: 0
+  fishInformation: {fileID: 0}
   cameras: []
   id: 
   identity: {fileID: 0}
   iniciado: 0
   timeSinceFeed: 10
   life: 0
-  energy: 0
   lifeTime: 0
+  totalLifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
   heuristic: {x: 0, y: 0, z: 0}
   totalReward: 0
+  SpawnTimeDays: 0
+  prefab: {fileID: 0}
+  lossLifeCoefficient: 0
+  MaxTemperatureSupported: 25.5
+  MinTemperatureSupported: 22.5
+  MinLightSupportedNight: 0
+  MaxLightSupportedNight: 1
+  MinLightSupported: 1
+  MaxLightSupported: 2
+  MinSpawnTimeDays: 365
+  MaxSpawnTimeDays: 730
 --- !u!136 &136991667405450956
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4782,18 +4879,30 @@ MonoBehaviour:
   camerap: {fileID: 0}
   moveSpeed: 0
   turnSpeed: 0
+  fishInformation: {fileID: 0}
   cameras: []
   id: 
   identity: {fileID: 0}
   iniciado: 0
   timeSinceFeed: 10
   life: 0
-  energy: 0
   lifeTime: 0
+  totalLifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
   heuristic: {x: 0, y: 0, z: 0}
   totalReward: 0
+  SpawnTimeDays: 0
+  prefab: {fileID: 0}
+  lossLifeCoefficient: 0
+  MaxTemperatureSupported: 25.5
+  MinTemperatureSupported: 22.5
+  MinLightSupportedNight: 0
+  MaxLightSupportedNight: 1
+  MinLightSupported: 1
+  MaxLightSupported: 2
+  MinSpawnTimeDays: 365
+  MaxSpawnTimeDays: 730
 --- !u!136 &136213037060397050
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5230,18 +5339,30 @@ MonoBehaviour:
   camerap: {fileID: 0}
   moveSpeed: 0
   turnSpeed: 0
+  fishInformation: {fileID: 0}
   cameras: []
   id: 
   identity: {fileID: 0}
   iniciado: 0
   timeSinceFeed: 10
   life: 0
-  energy: 0
   lifeTime: 0
+  totalLifeTime: 0
   distanceFromTarget: 0
   distanceFromFood: 0
   heuristic: {x: 0, y: 0, z: 0}
   totalReward: 0
+  SpawnTimeDays: 0
+  prefab: {fileID: 0}
+  lossLifeCoefficient: 0
+  MaxTemperatureSupported: 25.5
+  MinTemperatureSupported: 22.5
+  MinLightSupportedNight: 0
+  MaxLightSupportedNight: 1
+  MinLightSupported: 1
+  MaxLightSupported: 2
+  MinSpawnTimeDays: 365
+  MaxSpawnTimeDays: 730
 --- !u!136 &136599515192082012
 CapsuleCollider:
   m_ObjectHideFlags: 0

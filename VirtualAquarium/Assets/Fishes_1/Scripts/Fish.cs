@@ -46,7 +46,6 @@ namespace VirtualAquarium
         public float timeSinceFeed = 10;
         private float timeStayed = 0;
         public float life;
-        public float energy;
         public float lifeTime;
         public float totalLifeTime = 0;
         public float distanceFromTarget;
@@ -55,6 +54,7 @@ namespace VirtualAquarium
         public float totalReward;
         public float SpawnTimeDays;
         private static Mutex mutexFeed = new Mutex();
+        public GameObject prefab;
 
         [System.NonSerialized]
         public float changeTarget = 0f, changeAnim = 0f, timeSinceTarget = 0f, timeSinceAnim = 0f, prevAnim, currentAnim = 0f, prevSpeed, speed, zturn, prevz,
@@ -121,7 +121,6 @@ namespace VirtualAquarium
         private void Start()
         {
             life = 100;
-            energy = 100;
             turnSpeedBackup = turnSpeed;
 
             if (!gameController)
@@ -161,43 +160,6 @@ namespace VirtualAquarium
             actionsOut.DiscreteActions.Array[1] = 1;
         }
 
-        public override void OnActionReceived(ActionBuffers actions)
-        {
-            float[] vectorAction = actions.ContinuousActions.Array;
-
-            totalReward = GetCumulativeReward();
-            //Converte a terceira ação para a chamada do método correspondente (1 para beber, 2 para comer)
-            if (actions.DiscreteActions[0] == 1)
-            {
-                Feed();
-            }
-
-            if (actions.DiscreteActions[1] == 1 && fishReproduction != null && startScale.x == transform.localScale.x)
-            {
-                if (fishReproduction.Reproduce())
-                {
-                    AddReward(0.5f);
-                }
-            }
-
-            if (State == FStates.Stay && HasEnergy())
-            {
-                State = FStates.Patrol;
-                if (GetComponent<BehaviorParameters>().BehaviorType != BehaviorType.HeuristicOnly)
-                    heuristic = new Vector3(vectorAction[0], vectorAction[1], vectorAction[2]);
-                target = new Vector3(vectorAction[0] * fishArea.bounds.size.x / 2 * 0.9f,
-                                     vectorAction[1] * fishArea.bounds.size.y / 2 * 0.9f,
-                                     vectorAction[2] * fishArea.bounds.size.z / 2 * 0.9f) + fishArea.transform.position;
-                //Debug.Log(string.Join("|", new List<float>(vectorAction).ConvertAll<string>((value) => value.ToString()).ToArray()));
-                //Debug.Log("y" + target.y);
-                if (Vector3.Magnitude(target - rigidbody.position) < 3)
-                {
-                    AddReward(-0.1f);
-                }
-            }
-        }
-
-
         public override void OnEpisodeBegin()
         {
             totalLifeTime = 0;
@@ -206,7 +168,6 @@ namespace VirtualAquarium
             if (gameController.Simulador)
             {
                 life = UnityEngine.Random.Range(50, 100);
-                energy = UnityEngine.Random.Range(50, 100);
 
                 transform.position = fishArea.GetRandomPoint();
                 State = FStates.Stay;
@@ -235,6 +196,39 @@ namespace VirtualAquarium
             sensor.AddObservation((int)AquariumProperties.CurrentTimeSpeed);
         }
 
+        public override void OnActionReceived(ActionBuffers actions)
+        {
+            float[] vectorAction = actions.ContinuousActions.Array;
+
+            totalReward = GetCumulativeReward();
+
+            if (actions.DiscreteActions[0] == 1)
+            {
+                Feed();
+            }
+
+            if (actions.DiscreteActions[1] == 1 && fishReproduction != null && startScale.x == transform.localScale.x)
+            {
+                if (fishReproduction.Reproduce())
+                {
+                    AddReward(5f);
+                }
+            }
+
+            if (State == FStates.Stay)
+            {
+                State = FStates.Patrol;
+                target = new Vector3(vectorAction[0] * fishArea.bounds.size.x / 2 * 0.9f,
+                                     vectorAction[1] * fishArea.bounds.size.y / 2 * 0.9f,
+                                     vectorAction[2] * fishArea.bounds.size.z / 2 * 0.9f) + fishArea.transform.position;
+
+                if (Vector3.Magnitude(target - rigidbody.position) < 3)
+                {
+                    AddReward(-0.1f);
+                }
+            }
+        }
+
         private bool IsLowLife()
         {
             return life <= 40;
@@ -242,11 +236,6 @@ namespace VirtualAquarium
         private bool IsSuperLife()
         {
             return life > 100;
-        }
-
-        private bool HasEnergy()
-        {
-            return energy >= 50;
         }
 
         private void Update()
@@ -302,7 +291,7 @@ namespace VirtualAquarium
 
                         if (startScale.x > transform.localScale.x)
                         {
-                            transform.localScale = transform.localScale + (startScale / AquariumProperties.timeSpeedMultiplier / (24 * 20));
+                            transform.localScale = transform.localScale + (startScale / AquariumProperties.timeSpeedMultiplier / (200));
                         }
 
                     }

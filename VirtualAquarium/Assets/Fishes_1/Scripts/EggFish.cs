@@ -10,7 +10,8 @@ namespace VirtualAquarium
         public EggState state = EggState.Layed;
         public float timeSinceFertilized = 0;
         public float timeSinceLayed = 0;
-        public Fish mother, father;
+        public Fish mother, father, prefab;
+        public FishArea fishArea;
 
         GameController gameController;
 
@@ -52,6 +53,8 @@ namespace VirtualAquarium
             {
                 EggFish egg = Instantiate(fish.fishArea.eggFish, fish.transform.position, fish.transform.rotation, fish.fishArea.transform);
                 egg.mother = fish;
+                egg.prefab = fish.prefab.GetComponent<Fish>();
+                egg.fishArea = fish.fishArea;
                 return true;
             }
             return false;
@@ -59,7 +62,7 @@ namespace VirtualAquarium
 
         public bool fertilize(Fish fish)
         {
-            if (state == EggState.Layed && fish.gender == Gender.male && fish.specie == mother.specie)
+            if (state == EggState.Layed && fish.gender == Gender.male && fish.specie == prefab.specie)
             {
                 state = EggState.Fertilized;
                 father = fish;
@@ -77,11 +80,10 @@ namespace VirtualAquarium
 
                 if (timeSinceFertilized > 100)
                 {
-                    mother.AddReward(1f / mother.MaxStep);
-                    father.AddReward(1f / mother.MaxStep);
-
-                    Fish newFish = Instantiate(mother, transform.position, transform.rotation, mother.fishArea.transform);
-                    newFish.Initialize(mother.fishArea, true);
+                    GameObject newFishObj = fishArea.SpawnFish(prefab.gameObject, Gender.random);
+                    Fish newFish = newFishObj.GetComponent<Fish>();
+                    newFish.Initialize(fishArea, true);
+                    fishArea.fishes.Add(newFish);
 
                     Destroy(gameObject, 1);
                     state = EggState.Born;
@@ -92,7 +94,6 @@ namespace VirtualAquarium
                 timeSinceLayed += Time.deltaTime / AquariumProperties.timeSpeedMultiplier;
                 if (timeSinceLayed > 100)
                 {
-                    mother.AddReward(-1f / mother.MaxStep);
                     Destroy(gameObject, 1);
                 }
             }
