@@ -318,7 +318,8 @@ namespace VirtualAquarium
 
         private void OnDestroy()
         {
-            fishArea.fishesInformation?.RemoveFishInformation(fishInformation.gameObject);
+            if (fishInformation != null)
+              fishArea.fishesInformation?.RemoveFishInformation(fishInformation.gameObject);
         }
         void Feed()
         {
