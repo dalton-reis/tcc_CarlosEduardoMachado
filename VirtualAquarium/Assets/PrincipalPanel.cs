@@ -60,6 +60,7 @@ public class PrincipalPanel : MonoBehaviour
         gameController.server = ServidorMult.text;
         gameController.interativa = InterfaceInterativa.isOn;
         gameController.Simulador = Simulador.isOn;
+        gameController.VR = false;
     }
 
     public void StartSceneAquarium()
@@ -134,6 +135,7 @@ public class PrincipalPanel : MonoBehaviour
         gameController.multi = Multiplayer.isOn;
         gameController.CameraDesenvolvimento = CameraDesenvolvimento.isOn;
         gameController.server = ServidorMult.text;
+        gameController.VR = true;
         SceneManager.LoadScene("AquariumSceneVR");
     }
 

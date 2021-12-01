@@ -12,7 +12,7 @@ namespace VirtualAquarium
     public abstract class FishReproduction
     {
         private Fish _fish;
-        protected float timeSinceReproduction = 0;
+        public float timeSinceReproduction = 0;
 
         public Fish fish { get => _fish; set => _fish = value; }
 

@@ -59,6 +59,8 @@ namespace VirtualAquarium
         public ParticleSystem particleFood;
         public Button sairButton;
         public Button foodIcon;
+        public Button aumentaAquecedorButton;
+        public Button diminuiAquecedorButton;
         private bool dropFood;
         private const string DEFAULT_HOUR_MASK = "HH:mm";
         private DateTime initialNight = DateTime.ParseExact("19:00", DEFAULT_HOUR_MASK, CultureInfo.InvariantCulture);
@@ -113,7 +115,13 @@ namespace VirtualAquarium
                 lightingSlider.onValueChanged.AddListener(changeLight);
 
                 foodIcon.onClick.AddListener(giveFood);
+
+                aumentaAquecedorButton?.onClick?.AddListener(addHeaterTemperature);
+                diminuiAquecedorButton?.onClick?.AddListener(removeHeaterTemperature);
             }
+
+            aumentaAquecedorButton?.gameObject?.SetActive(gameController.interativa);
+            diminuiAquecedorButton?.gameObject?.SetActive(gameController.interativa);
 
 
             if (AquariumProperties.configs != null)
@@ -132,6 +140,16 @@ namespace VirtualAquarium
             AquariumProperties.currentWheater = AquariumProperties.Wheater.Sun;
             AquariumProperties.aquariumHour = DateTime.ParseExact("08:00", DEFAULT_HOUR_MASK, CultureInfo.InvariantCulture);
             lastFoodHour = DateTime.ParseExact("08:00", DEFAULT_HOUR_MASK, CultureInfo.InvariantCulture);
+        }
+        
+        private void removeHeaterTemperature()
+        {
+            AquariumProperties.heaterTemperature--;
+        }
+
+        private void addHeaterTemperature()
+        {
+            AquariumProperties.heaterTemperature++;
         }
 
         private void fishHealthTextClick()
@@ -340,6 +358,9 @@ namespace VirtualAquarium
             float timeCoefficient = 0;
             switch (AquariumProperties.CurrentTimeSpeed)
             {
+                case AquariumProperties.TimeSpeed.SuperFast:
+                    timeCoefficient = 100;
+                    break;
                 case AquariumProperties.TimeSpeed.Fast:
                     timeCoefficient = 150;
                     break;

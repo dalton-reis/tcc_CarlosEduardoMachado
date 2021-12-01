@@ -13,8 +13,6 @@ namespace VirtualAquarium
         public Fish mother, father, prefab;
         public FishArea fishArea;
 
-        GameController gameController;
-
         new private Rigidbody rigidbody;
         public void OnTriggerEnter(Collider collision)
         {
@@ -22,9 +20,7 @@ namespace VirtualAquarium
             {
                 if (rigidbody)
                 {
-                    rigidbody.useGravity = false;
-                    rigidbody.velocity = Vector3.zero;
-                    rigidbody.angularVelocity = Vector3.zero;
+                    rigidbody.isKinematic = true;
                     GetComponent<SphereCollider>().isTrigger = false;
                     Debug.Log("Entrou terreno");
                 }
@@ -40,7 +36,6 @@ namespace VirtualAquarium
         // Start is called before the first frame update
         void Start()
         {
-            gameController = GameObject.FindObjectOfType<GameController>();
             tag = "Egg";
             rigidbody = GetComponentInChildren<Rigidbody>();
             // rigidbody.AddForce(0, -1, 0);
@@ -71,7 +66,6 @@ namespace VirtualAquarium
             return false;
         }
 
-        // Update is called once per frame
         void Update()
         {
             if (state == EggState.Fertilized)
@@ -80,10 +74,13 @@ namespace VirtualAquarium
 
                 if (timeSinceFertilized > 100)
                 {
-                    GameObject newFishObj = fishArea.SpawnFish(prefab.gameObject, Gender.random);
-                    Fish newFish = newFishObj.GetComponent<Fish>();
-                    newFish.Initialize(fishArea, true);
-                    fishArea.fishes.Add(newFish);
+                    if (!GameObject.FindObjectOfType<GameController>().Simulador)
+                    {
+                        GameObject newFishObj = fishArea.SpawnFish(prefab.gameObject, Gender.random);
+                        Fish newFish = newFishObj.GetComponent<Fish>();
+                        newFish.Initialize(fishArea, true);
+                        fishArea.fishes.Add(newFish);
+                    }
 
                     Destroy(gameObject, 1);
                     state = EggState.Born;
@@ -97,7 +94,6 @@ namespace VirtualAquarium
                     Destroy(gameObject, 1);
                 }
             }
-
         }
     }
 }

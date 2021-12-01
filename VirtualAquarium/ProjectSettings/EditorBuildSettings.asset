@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AquariumSceneClient.unity
     guid: 4d8e98fcdb37cfe4c84cf4543287f231
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AquariumSceneServer.unity
     guid: f10698892ae358f429cd046748ea426b
   - enabled: 1

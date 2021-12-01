@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mirror;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 namespace VirtualAquarium
@@ -72,12 +73,35 @@ namespace VirtualAquarium
 
             fishesInformation?.AddFishInformation(null);
             SpawnFishes();
+            if (gameController.multi)
+            {
+                this.disableAllFishes();
+            } else if (gameController.VR)
+            {
+                fishes[0].camerap.gameObject.SetActive(true);
+            }
             InitializeAllFishes();
 
         }
 
+        private void disableAllFishes()
+        {
+            fishes = new List<Fish>(GameObject.FindObjectsOfType<Fish>());
+            foreach (Fish fish in fishes)
+            {
+                fish.gameObject.SetActive(false);
+            }
+        }
+
         public void Update()
         {
+            int antes = fishes.Count;
+            fishes = new List<Fish>(GameObject.FindObjectsOfType<Fish>());
+            if (antes != fishes.Count)
+            {
+                InitializeAllFishes();
+            }
+
             if (Input.GetKeyDown(KeyCode.Space) && AquariumProperties.foodAvailable > 0)
             {
                 AquariumProperties.foodAvailable--;
@@ -182,7 +206,7 @@ namespace VirtualAquarium
 
         }
 
-        protected GameObject GetRandomPrefab()
+        public GameObject GetRandomPrefab()
         {
             int id = UnityEngine.Random.Range(0, prefabs.Length);
             return prefabs[id];

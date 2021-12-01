@@ -585,6 +585,7 @@ MonoBehaviour:
   interativa: 0
   CameraDesenvolvimento: 0
   Simulador: 0
+  VR: 0
   server: 
 --- !u!4 &206471238
 Transform:

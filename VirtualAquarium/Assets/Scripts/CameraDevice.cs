@@ -72,7 +72,8 @@ public class CameraDevice : NetworkBehaviour {
     void Update () {
         if (SceneManager.GetActiveScene ().name == "AquariumSceneClient") {
             Texture2D photo = new Texture2D (width, height, TextureFormat.RGB24, false);
-            photo.SetPixels (backCam.GetPixels ());
+            if (backCam.isPlaying)
+                photo.SetPixels (backCam.GetPixels ());
             photo.Apply ();
             TextureScale.Bilinear (photo, width / 4, height / 4);
             byte[] t = photo.EncodeToJPG ();

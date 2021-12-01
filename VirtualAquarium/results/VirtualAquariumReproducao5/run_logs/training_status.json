@@ -1,0 +1,65 @@
+{
+    "VirtualAquarium": {
+        "checkpoints": [
+            {
+                "steps": 4499974,
+                "file_path": "results\\VirtualAquariumReproducao5\\VirtualAquarium\\VirtualAquarium-4499974.onnx",
+                "reward": null,
+                "creation_time": 1637898070.5434196,
+                "auxillary_file_paths": [
+                    "results\\VirtualAquariumReproducao5\\VirtualAquarium\\VirtualAquarium-4499974.pt"
+                ]
+            },
+            {
+                "steps": 4999952,
+                "file_path": "results\\VirtualAquariumReproducao5\\VirtualAquarium\\VirtualAquarium-4999952.onnx",
+                "reward": null,
+                "creation_time": 1637906822.2915356,
+                "auxillary_file_paths": [
+                    "results\\VirtualAquariumReproducao5\\VirtualAquarium\\VirtualAquarium-4999952.pt"
+                ]
+            },
+            {
+                "steps": 5499963,
+                "file_path": "results\\VirtualAquariumReproducao5\\VirtualAquarium\\VirtualAquarium-5499963.onnx",
+                "reward": null,
+                "creation_time": 1637915779.9778686,
+                "auxillary_file_paths": [
+                    "results\\VirtualAquariumReproducao5\\VirtualAquarium\\VirtualAquarium-5499963.pt"
+                ]
+            },
+            {
+                "steps": 5999956,
+                "file_path": "results\\VirtualAquariumReproducao5\\VirtualAquarium\\VirtualAquarium-5999956.onnx",
+                "reward": 27.19199800491333,
+                "creation_time": 1637924161.8574667,
+                "auxillary_file_paths": [
+                    "results\\VirtualAquariumReproducao5\\VirtualAquarium\\VirtualAquarium-5999956.pt"
+                ]
+            },
+            {
+                "steps": 6446133,
+                "file_path": "results\\VirtualAquariumReproducao5\\VirtualAquarium\\VirtualAquarium-6446133.onnx",
+                "reward": null,
+                "creation_time": 1637932369.689994,
+                "auxillary_file_paths": [
+                    "results\\VirtualAquariumReproducao5\\VirtualAquarium\\VirtualAquarium-6446133.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 6446133,
+            "file_path": "results\\VirtualAquariumReproducao5\\VirtualAquarium.onnx",
+            "reward": null,
+            "creation_time": 1637932369.689994,
+            "auxillary_file_paths": [
+                "results\\VirtualAquariumReproducao5\\VirtualAquarium\\VirtualAquarium-6446133.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.27.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

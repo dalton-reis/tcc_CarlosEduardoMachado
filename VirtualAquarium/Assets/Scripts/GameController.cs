@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public bool multi, iot, interativa, CameraDesenvolvimento, Simulador;
+    public bool multi, iot, interativa, CameraDesenvolvimento, Simulador, VR;
     public string server;
 
     public static GameController gameController;
