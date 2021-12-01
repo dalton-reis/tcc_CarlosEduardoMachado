@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: -6315272600705849236}
   - component: {fileID: 2444072608264520575}
   - component: {fileID: 4960034330688971269}
+  - component: {fileID: 6037714968927032093}
   m_Layer: 0
   m_Name: Diodon_holocanthus
   m_TagString: Player
@@ -441,6 +442,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &6037714968927032093
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548279159701676}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1276562, y: 0.09155491, z: 0.03799233}
+  m_Center: {x: -0.0030055419, y: -0.004340045, z: 0.20746224}
 --- !u!1 &1626854622435632
 GameObject:
   m_ObjectHideFlags: 0

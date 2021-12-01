@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 5350749284433160594}
   - component: {fileID: 2605615239282093817}
   - component: {fileID: 8639150473240661945}
+  - component: {fileID: 7072935835476688424}
   m_Layer: 0
   m_Name: Paracanthurus_hepatus
   m_TagString: Player
@@ -457,6 +458,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &7072935835476688424
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561314948883648}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1276562, y: 0.09155491, z: 0.07566145}
+  m_Center: {x: -0.0030055419, y: -0.004340045, z: 0.2262968}
 --- !u!1 &1712909841995360
 GameObject:
   m_ObjectHideFlags: 0

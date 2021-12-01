@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: -9175476073273055387}
   - component: {fileID: -4612700129177685374}
   - component: {fileID: 9165047558475921312}
+  - component: {fileID: 6704661301736344977}
   m_Layer: 0
   m_Name: Multiplayer
   m_TagString: Untagged
@@ -229,9 +230,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.041215766
-  m_Height: 0.40650004
+  m_Height: 0.3394129
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0.04094258}
+  m_Center: {x: 0, y: 0, z: 0.0073990077}
 --- !u!114 &-8355741909962850238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +357,19 @@ MonoBehaviour:
   syncInterval: 0.1
   clientAuthority: 1
   animator: {fileID: 95325817889468686}
+--- !u!65 &6704661301736344977
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327104955442478}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.048344478, y: 0.09155491, z: 0.073735744}
+  m_Center: {x: 0.0055126175, y: -0.004340045, z: 0.20724611}
 --- !u!1 &1599118483228156
 GameObject:
   m_ObjectHideFlags: 0

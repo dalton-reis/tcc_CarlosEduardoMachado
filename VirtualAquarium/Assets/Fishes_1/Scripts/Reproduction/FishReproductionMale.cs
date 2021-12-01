@@ -8,12 +8,15 @@ namespace VirtualAquarium
     {
         public override bool Reproduce()
         {
-            timeSinceReproduction = Time.fixedTime;
-            foreach (EggFish egg in fish.fishArea.GetComponentsInChildren<EggFish>())
+            if (timeSinceReproduction == 0 || timeSinceReproduction + AquariumProperties.timeSpeedMultiplier * 2 <= Time.fixedTime)
             {
-                if (Vector3.Distance(fish.transform.position, egg.transform.position) < 4)
+                timeSinceReproduction = Time.fixedTime;
+                foreach (EggFish egg in fish.fishArea.GetComponentsInChildren<EggFish>())
                 {
-                    return egg.fertilize(fish);
+                    if (Vector3.Distance(fish.transform.position, egg.transform.position) < 3 && egg.fertilize(fish))
+                    {
+                        return true;
+                    }
                 }
             }
             return false;

@@ -385,6 +385,7 @@ GameObject:
   - component: {fileID: 6205553710479221275}
   - component: {fileID: 2000722046765310348}
   - component: {fileID: -6202289956354390447}
+  - component: {fileID: 2159126145825742278}
   m_Layer: 0
   m_Name: Amphiprion_ocellaris
   m_TagString: Player
@@ -489,9 +490,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.06455106
-  m_Height: 0.55
+  m_Height: 0.5204393
   m_Direction: 2
-  m_Center: {x: 0.005555071, y: -0.02, z: 0}
+  m_Center: {x: 0.005555071, y: -0.020000003, z: -0.014780372}
 --- !u!135 &135478887330622788
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -580,6 +581,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &2159126145825742278
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785826640799354}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.09775305, y: 0.10164729, z: 0.057210356}
+  m_Center: {x: 0, y: -0.031802267, z: 0.24120848}
 --- !u!1 &3403933513317559418
 GameObject:
   m_ObjectHideFlags: 0

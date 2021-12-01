@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 8550966572081009984}
   - component: {fileID: 559355530970637085}
   - component: {fileID: 8268513380471089349}
+  - component: {fileID: 7144711861990435112}
   m_Layer: 0
   m_Name: Balistoides_conspicillum
   m_TagString: Player
@@ -115,9 +116,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.063234285
-  m_Height: 0.55723274
+  m_Height: 0.5158355
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: -0.039074473}
+  m_Center: {x: 0, y: 0, z: -0.05977308}
 --- !u!114 &114185668412627788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +242,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &7144711861990435112
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257106750040138}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.048344478, y: 0.09155491, z: 0.053853318}
+  m_Center: {x: 0.0055126175, y: -0.004340045, z: 0.21539274}
 --- !u!1 &1341971271534432
 GameObject:
   m_ObjectHideFlags: 0

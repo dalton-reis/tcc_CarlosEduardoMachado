@@ -322,6 +322,7 @@ GameObject:
   - component: {fileID: -9027356342520693267}
   - component: {fileID: 680845888741870099}
   - component: {fileID: 942399766175919607}
+  - component: {fileID: 2724942882098828813}
   m_Layer: 0
   m_Name: Bermuda_Blue_Angelfish
   m_TagString: Player
@@ -378,9 +379,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.052884925
-  m_Height: 0.5001497
+  m_Height: 0.4733631
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: -0.024925113}
+  m_Center: {x: 0, y: 0, z: -0.038318425}
 --- !u!135 &135356580184969736
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -517,6 +518,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &2724942882098828813
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897128806831474}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.048344478, y: 0.09155491, z: 0.05003336}
+  m_Center: {x: 0.0055126175, y: -0.004340045, z: 0.21348275}
 --- !u!1 &1944698363159934
 GameObject:
   m_ObjectHideFlags: 0

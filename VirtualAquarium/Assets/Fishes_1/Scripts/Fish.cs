@@ -56,6 +56,7 @@ namespace VirtualAquarium
         public GameObject prefab;
 
         private float timeSinceAnim = 0f, prevSpeed, turnSpeedBackup;
+        private List<GameObject> triggeredFood;
 
         private Vector3 startScale;
 
@@ -130,6 +131,7 @@ namespace VirtualAquarium
             rigidbody = GetComponent<Rigidbody>();
             bounds = fishArea.bounds;
             State = FStates.Stay;
+            triggeredFood = new List<GameObject>();
 
 
             if (gameController.multi)
@@ -204,7 +206,7 @@ namespace VirtualAquarium
             {
                 if (fishReproduction.Reproduce())
                 {
-                    AddReward(5f);
+                    AddReward(1f);
                     if (gameController.Simulador) GameObject.FindObjectOfType<DebugCanvas>().AddReproduce();
                 }
             }
@@ -221,6 +223,11 @@ namespace VirtualAquarium
                 if (Vector3.Magnitude(target - rigidbody.position) < 3)
                 {
                     AddReward(-0.1f);
+                }
+
+                if (transform.position.y - 0.5 > target.y)
+                {
+                    AddReward(-0.01f);
                 }
             }
         }
@@ -274,12 +281,6 @@ namespace VirtualAquarium
                     else
                         AddReward(0.01f);
 
-                    if (playersAround.Count > 0)
-                    {
-                        AddReward(-100f / MaxStep);
-                    }
-
-
                     if (lifeTime >= 1)
                     {
                         life -= AquariumProperties.lifeLostPerHour / AquariumProperties.timeSpeedMultiplier + lossLifeCoefficient;
@@ -287,7 +288,7 @@ namespace VirtualAquarium
 
                         if (startScale.x > transform.localScale.x)
                         {
-                            transform.localScale = transform.localScale + (startScale / AquariumProperties.timeSpeedMultiplier / (200));
+                            transform.localScale = transform.localScale + (startScale / AquariumProperties.timeSpeedMultiplier / 100);
                             if (transform.localScale.x > startScale.x)
                                 transform.localScale = startScale;
                         }
@@ -306,16 +307,19 @@ namespace VirtualAquarium
                 }
                 else
                 {
-                    target = new Vector3(transform.position.x, 70f, transform.position.z);
+                    target = new Vector3(transform.position.x, 10f, transform.position.z);
                     if (animator)
                         animator.speed = 0.2f;
                     State = FStates.Die;
                     ResetVelocity();
-                    fishArea.fishesInformation?.RemoveFishInformation(fishInformation.gameObject);
                 }
             }
         }
 
+        private void OnDestroy()
+        {
+            fishArea.fishesInformation?.RemoveFishInformation(fishInformation.gameObject);
+        }
         void Feed()
         {
             if (fishArea.feedPoint.foods.Count > 0 && timeSinceFeed >= 5)
@@ -325,9 +329,15 @@ namespace VirtualAquarium
                 distanceFromFood = Vector3.Distance(transform.position, food.transform.position);
                 if (Vector3.Distance(transform.position, food.transform.position) < eatRadius)
                 {
-                    State = FStates.Feed;
-                    target = new Vector3(food.transform.position.x, food.transform.position.y, food.transform.position.z);
-                    this.food = food;
+                    if (triggeredFood.Contains(food))
+                    {
+                        Eat(food);
+                    } else
+                    {
+                        State = FStates.Feed;
+                        target = new Vector3(food.transform.position.x, food.transform.position.y, food.transform.position.z);
+                        this.food = food;
+                    }
                 }
 
             }
@@ -339,19 +349,19 @@ namespace VirtualAquarium
                 gameController = GameObject.FindObjectOfType<GameController>();
             if (gameController.Simulador)
             {
-                AddReward(-100f);
+                AddReward(-50f);
                 EndEpisode();
                 return;
             }
+
+
             transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * fishArea.speed * 0.5f);
             deadTime += Time.deltaTime;
-            if (totalRotate < 180)
-            {
-                transform.Rotate(0, 0, 2);
-                totalRotate += 2;
-            }
 
-            if (transform.position == target && deadTime > 25)
+            Quaternion rotation = Quaternion.Euler(0, 0, 90);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 1);
+
+            if (transform.position.y >= target.y - 0.5 && deadTime > 25)
             {
                 gameObject.SetActive(false);
                 fishArea.removeFish(this);
@@ -363,6 +373,21 @@ namespace VirtualAquarium
         void Patrol()
         {
             animator?.SetInteger("State", 1);
+            bool haveFishes = false;
+            Ray ray = new Ray(transform.position, transform.forward);
+            var casts = Physics.RaycastAll(ray, fishArea.raycastDistance);
+            foreach (var cast in casts)
+            {
+                if (cast.collider.transform != this.transform)
+                {
+                    if (cast.collider.tag.Equals("Player"))
+                    {
+                        haveFishes = true;
+                    }
+
+                    break;
+                }
+            }
 
             // Calculate distances
             distanceFromTarget = Vector3.Magnitude(target - rigidbody.position);
@@ -395,7 +420,8 @@ namespace VirtualAquarium
             float singleStep = turnSpeed * Time.deltaTime;
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
-
+            if (haveFishes)
+                transform.Rotate(0, singleStep, 0);
             // Move em direção ao objetivo
             direction = Quaternion.Euler(transform.eulerAngles) * Vector3.forward;
             rigidbody.velocity = Mathf.Lerp(prevSpeed, fishArea.speed, Mathf.Clamp(timeSinceAnim / 3, 0f, 1f)) * direction;
@@ -473,6 +499,7 @@ namespace VirtualAquarium
 
             fishReproduction = FishReproductionFactory.createFishReproduction(this);
 
+            transform.localScale *= 2;
             if (newChildren)
             {
                 startScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -481,7 +508,6 @@ namespace VirtualAquarium
             }
             else
             {
-                transform.localScale *= 2;
                 startScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
                 totalLifeTime = UnityEngine.Random.Range(10f, 20f);
             }
@@ -499,39 +525,56 @@ namespace VirtualAquarium
             playersAround.Remove(t);
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            
+            if (other.GetComponent<Collider>().tag == "Food")
+            {
+                triggeredFood.Add(other.gameObject);
+                if (timeSinceFeed >= 5 && State == FStates.Feed)
+                {
+                    Eat(other.gameObject);
+                }
+            }
+        }
+
+        private void Eat(GameObject food)
+        {
+            timeSinceFeed = 0;
+            Debug.Log("Comeu");
+
+            if (IsLowLife()) AddReward(1f);
+            else if (!IsAboveMaxLife()) AddReward(0.5f);
+            else if (IsAboveMaxLife()) AddReward(-life / 100f / 10f);
+
+            life += UnityEngine.Random.Range(15, 30);
+            fishArea.removeFood(food);
+
+            if (!fishArea.particleFood.isPlaying && fishArea.feedPoint.foods.Count == 0 && gameController.Simulador && AquariumProperties.foodAvailable > 0)
+            {
+                AquariumProperties.foodAvailable--;
+                fishArea.particleFood.Play();
+            }
+
+            if (gameController.Simulador) GameObject.FindObjectOfType<DebugCanvas>().AddEat();
+
+            ResetVelocity();
+            State = FStates.Stay;
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.GetComponent<Collider>().tag == "Food")
+                triggeredFood.Remove(other.gameObject);
+        }
+
         public void OnCollisionEnter(Collision other)
         {
 
-            if (other.collider.tag == "Player" && State != FStates.Feed)
+            if (other.collider.tag == "Player")
             {
                 AddPlayer(other.transform);
-                AddReward(-0.001f);
-            }
-            else if (State == FStates.Feed)
-            {
-                if (timeSinceFeed >= 5 && other.collider.tag == "Food")
-                {
-                    timeSinceFeed = 0;
-                    Debug.Log("Comeu");
-
-                    if (IsLowLife()) AddReward(1f);
-                    else if (!IsAboveMaxLife()) AddReward(0.1f);
-                    else if (IsAboveMaxLife()) AddReward(-life / 100f / 100f);
-
-                    life += UnityEngine.Random.Range(15, 30);
-                    fishArea.removeFood(other.gameObject);
-
-                    if (!fishArea.particleFood.isPlaying && fishArea.feedPoint.foods.Count == 0 && gameController.Simulador && AquariumProperties.foodAvailable > 0)
-                    {
-                        AquariumProperties.foodAvailable--;
-                        fishArea.particleFood.Play();
-                    }
-
-                    if (gameController.Simulador) GameObject.FindObjectOfType<DebugCanvas>().AddEat();
-
-                    ResetVelocity();
-                    State = FStates.Stay;
-                }
+                AddReward(-0.01f);
             }
         }
 

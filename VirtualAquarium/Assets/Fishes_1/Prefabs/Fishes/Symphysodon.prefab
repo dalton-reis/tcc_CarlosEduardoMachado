@@ -353,6 +353,7 @@ GameObject:
   - component: {fileID: 5616859924313093732}
   - component: {fileID: 6480067508591027225}
   - component: {fileID: 4027219157527671075}
+  - component: {fileID: 4647736952434318844}
   m_Layer: 0
   m_Name: Symphysodon
   m_TagString: Player
@@ -470,9 +471,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.03675656
-  m_Height: 0.5137777
+  m_Height: 0.48076886
   m_Direction: 2
-  m_Center: {x: 0, y: -0.020780917, z: -0.01811114}
+  m_Center: {x: 0, y: -0.020780917, z: -0.034615546}
 --- !u!114 &5616859924313093732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,6 +549,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &4647736952434318844
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939980075445004}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.048344478, y: 0.09155491, z: 0.067272455}
+  m_Center: {x: 0.0055126175, y: -0.004340045, z: 0.22385056}
 --- !u!1 &1959973264462600
 GameObject:
   m_ObjectHideFlags: 0

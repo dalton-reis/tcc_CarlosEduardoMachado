@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 4653683567808192513}
   - component: {fileID: 7856637751968425455}
   - component: {fileID: 7228802282963969925}
+  - component: {fileID: 4929729057686591078}
   m_Layer: 0
   m_Name: Pterapogon_kauderni
   m_TagString: Player
@@ -441,9 +442,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.053263053
-  m_Height: 0.6241043
+  m_Height: 0.6030372
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: -0.06869897}
+  m_Center: {x: 0, y: 0, z: -0.07923254}
 --- !u!114 &4653683567808192513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,6 +520,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &4929729057686591078
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878850505283432}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.048344478, y: 0.09155491, z: 0.10118395}
+  m_Center: {x: 0.0055126175, y: -0.004340045, z: 0.22097021}
 --- !u!1 &1948763491618600
 GameObject:
   m_ObjectHideFlags: 0

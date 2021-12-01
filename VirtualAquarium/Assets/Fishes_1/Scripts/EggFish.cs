@@ -21,7 +21,6 @@ namespace VirtualAquarium
                 if (rigidbody)
                 {
                     rigidbody.isKinematic = true;
-                    GetComponent<SphereCollider>().isTrigger = false;
                     Debug.Log("Entrou terreno");
                 }
             }
@@ -72,7 +71,7 @@ namespace VirtualAquarium
             {
                 timeSinceFertilized += Time.deltaTime / AquariumProperties.timeSpeedMultiplier;
 
-                if (timeSinceFertilized > 100)
+                if ((AquariumProperties.CurrentTimeSpeed == AquariumProperties.TimeSpeed.SuperFast && timeSinceFertilized > 6) || timeSinceFertilized > 100)
                 {
                     if (!GameObject.FindObjectOfType<GameController>().Simulador)
                     {
