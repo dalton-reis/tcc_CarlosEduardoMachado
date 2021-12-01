@@ -56,9 +56,22 @@ namespace VirtualAquarium
         void Update()
         {
             if (fishArea.SelectedFish == Fish)
+            {
                 TextFishName.color = Color.green;
+            }
             else
-                TextFishName.color = Color.white;
+            {
+                if (Fish != null && AquariumProperties.aquariumTemperature > Fish.MaxTemperatureSupported)
+                {
+                    TextFishName.color = Color.red;
+                } else if (Fish != null && AquariumProperties.aquariumTemperature < Fish.MinTemperatureSupported)
+                {
+                    TextFishName.color = Color.cyan;
+                } else
+                {
+                    TextFishName.color = Color.white;
+                }
+            }
 
             if (Fish != null)
                 healthSlider.value = Fish.life * 0.01f;
