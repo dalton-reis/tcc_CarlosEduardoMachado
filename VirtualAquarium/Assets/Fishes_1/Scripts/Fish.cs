@@ -169,6 +169,7 @@ namespace VirtualAquarium
             {
                 GameObject.FindObjectOfType<DebugCanvas>().reloadReward();
                 life = UnityEngine.Random.Range(20, 100);
+                energy = UnityEngine.Random.Range(50, 100);
 
                 transform.position = fishArea.GetRandomPoint();
                 State = FStates.Nothing;
@@ -181,7 +182,6 @@ namespace VirtualAquarium
                         AquariumProperties.foodAvailable = UnityEngine.Random.Range(1, 3);
                 }
             }
-            energy = 100;
         }
 
         public override void CollectObservations(VectorSensor sensor)
@@ -436,9 +436,14 @@ namespace VirtualAquarium
             Vector3 targetDirection = target - transform.position;
             float singleStep = turnSpeed * Time.deltaTime;
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
-            transform.rotation = Quaternion.LookRotation(newDirection);
             if (haveFishes)
+            {
                 transform.Rotate(3 * singleStep, 3 * singleStep, 3 * singleStep);
+            } else
+            {
+                transform.rotation = Quaternion.LookRotation(newDirection);
+            }
+                
             // Move em direção ao objetivo
             direction = Quaternion.Euler(transform.eulerAngles) * Vector3.forward;
             rigidbody.velocity = Mathf.Lerp(prevSpeed, fishArea.speed, Mathf.Clamp(timeSinceAnim / 3, 0f, 1f)) * direction;
