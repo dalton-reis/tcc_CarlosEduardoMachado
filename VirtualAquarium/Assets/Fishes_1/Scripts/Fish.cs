@@ -43,6 +43,7 @@ namespace VirtualAquarium
         private int totalRotate = 0;
         private float deadTime = 0;
         private float timeSwimmingAway = 0;
+        private float timeStayedLife = 0;
         private float timeStayed = 0;
         public float timeSinceFeed = 10;
         public float life;
@@ -53,6 +54,7 @@ namespace VirtualAquarium
         public Vector3 heuristic;
         public float totalReward;
         public float SpawnTimeDays;
+        public float energy = 100;
         public GameObject prefab;
 
         private float timeSinceAnim = 0f, prevSpeed, turnSpeedBackup;
@@ -65,6 +67,7 @@ namespace VirtualAquarium
         public enum FStates
         {
             Patrol,
+            Nothing,
             Stay,
             SwimAway,
             Feed,
@@ -102,7 +105,8 @@ namespace VirtualAquarium
         {
             get => state; set
             {
-                lastState = state;
+                if (state != FStates.Nothing)
+                    lastState = state;
                 state = value;
             }
         }
@@ -130,7 +134,7 @@ namespace VirtualAquarium
             fishArea = GameObject.FindObjectOfType<FishArea>();
             rigidbody = GetComponent<Rigidbody>();
             bounds = fishArea.bounds;
-            State = FStates.Stay;
+            State = FStates.Nothing;
             triggeredFood = new List<GameObject>();
 
 
@@ -149,10 +153,9 @@ namespace VirtualAquarium
         public override void Heuristic(in ActionBuffers actionsOut)
         {
             var continuousActionsOut = actionsOut.ContinuousActions;
-            continuousActionsOut[0] = -heuristic.x;
+            continuousActionsOut[0] = heuristic.x;
             continuousActionsOut[1] = heuristic.y;
             continuousActionsOut[2] = heuristic.z;
-
             actionsOut.DiscreteActions.Array[0] = 1;
             actionsOut.DiscreteActions.Array[1] = 1;
         }
@@ -168,18 +171,17 @@ namespace VirtualAquarium
                 life = UnityEngine.Random.Range(20, 100);
 
                 transform.position = fishArea.GetRandomPoint();
-                State = FStates.Stay;
-
-                AquariumProperties.CurrentTimeSpeed = (AquariumProperties.TimeSpeed)UnityEngine.Random.Range(0, 5);
+                State = FStates.Nothing;
                 AquariumProperties.heaterTemperature = UnityEngine.Random.Range(19, 30);
-                
+
                 if (!fishArea.particleFood.isPlaying && fishArea.feedPoint.foods.Count == 0)
                 {
                     fishArea.particleFood.Play();
                     if (AquariumProperties.foodAvailable == 0)
-                      AquariumProperties.foodAvailable = UnityEngine.Random.Range(1, 11);
+                        AquariumProperties.foodAvailable = UnityEngine.Random.Range(1, 3);
                 }
             }
+            energy = 100;
         }
 
         public override void CollectObservations(VectorSensor sensor)
@@ -187,7 +189,7 @@ namespace VirtualAquarium
             totalReward = GetCumulativeReward();
             sensor.AddObservation(transform.forward);
             sensor.AddObservation((int)life);
-            sensor.AddObservation((int)State);
+            sensor.AddObservation((int)energy);
             sensor.AddObservation((int)distanceFromFood);
             sensor.AddObservation((int)gender);
             sensor.AddObservation((int)AquariumProperties.CurrentTimeSpeed);
@@ -211,10 +213,15 @@ namespace VirtualAquarium
                 }
             }
 
-            if (State == FStates.Stay)
+            if (State == FStates.Nothing && actions.DiscreteActions[2] == 1)
+            {
+                State = FStates.Stay;
+                timeStayed = 0;
+            }
+
+            if (State == FStates.Nothing)
             {
                 State = FStates.Patrol;
-
                 float[] targetPosition = actions.ContinuousActions.Array;
                 target = new Vector3(targetPosition[0] * fishArea.bounds.size.x / 2 * 0.9f,
                                      targetPosition[1] * fishArea.bounds.size.y / 2 * 0.9f,
@@ -223,11 +230,6 @@ namespace VirtualAquarium
                 if (Vector3.Magnitude(target - rigidbody.position) < 3)
                 {
                     AddReward(-0.1f);
-                }
-
-                if (transform.position.y - 0.5 > target.y)
-                {
-                    AddReward(-0.01f);
                 }
             }
         }
@@ -281,6 +283,18 @@ namespace VirtualAquarium
                     else
                         AddReward(0.01f);
 
+                    if (State == FStates.Stay)
+                        energy += 8 * Time.deltaTime;
+                    else
+                        energy -= Time.deltaTime;
+
+                    if (energy < 0)
+                        AddReward(energy * 0.001f);
+                    else if (energy > 200)
+                        AddReward((energy - 200) * -0.001f);
+                    else if (energy > 25)
+                        AddReward(0.01f);
+
                     if (lifeTime >= 1)
                     {
                         life -= AquariumProperties.lifeLostPerHour / AquariumProperties.timeSpeedMultiplier + lossLifeCoefficient;
@@ -299,10 +313,10 @@ namespace VirtualAquarium
                         life -= AquariumProperties.lifeLostPerHour / AquariumProperties.timeSpeedMultiplier;
                         timeSwimmingAway = 0;
                     }
-                    if (timeStayed >= 1)
+                    if (timeStayedLife >= 1)
                     {
                         life += AquariumProperties.lifeLostPerHour / AquariumProperties.timeSpeedMultiplier;
-                        timeStayed = 0;
+                        timeStayedLife = 0;
                     }
                 }
                 else
@@ -319,7 +333,7 @@ namespace VirtualAquarium
         private void OnDestroy()
         {
             if (fishInformation != null)
-              fishArea.fishesInformation?.RemoveFishInformation(fishInformation.gameObject);
+                fishArea.fishesInformation?.RemoveFishInformation(fishInformation.gameObject);
         }
         void Feed()
         {
@@ -333,7 +347,8 @@ namespace VirtualAquarium
                     if (triggeredFood.Contains(food))
                     {
                         Eat(food);
-                    } else
+                    }
+                    else
                     {
                         State = FStates.Feed;
                         target = new Vector3(food.transform.position.x, food.transform.position.y, food.transform.position.z);
@@ -343,7 +358,7 @@ namespace VirtualAquarium
 
             }
         }
-        
+
         void Die()
         {
             if (!gameController)
@@ -361,7 +376,7 @@ namespace VirtualAquarium
 
             Quaternion rotation = Quaternion.Euler(0, 0, 90);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 1);
-
+            ResetVelocity();
             if (transform.position.y >= target.y - 0.5 && deadTime > 25)
             {
                 gameObject.SetActive(false);
@@ -374,19 +389,22 @@ namespace VirtualAquarium
         void Patrol()
         {
             animator?.SetInteger("State", 1);
+
             bool haveFishes = false;
             Ray ray = new Ray(transform.position, transform.forward);
             var casts = Physics.RaycastAll(ray, fishArea.raycastDistance);
-            foreach (var cast in casts)
+            if (playersAround.Count > 0)
             {
-                if (cast.collider.transform != this.transform)
+                foreach (var cast in casts)
                 {
-                    if (cast.collider.tag.Equals("Player"))
+                    if (cast.collider.transform != this.transform)
                     {
-                        haveFishes = true;
+                        if (cast.collider.tag.Equals("Player"))
+                        {
+                            haveFishes = true;
+                            break;
+                        }
                     }
-
-                    break;
                 }
             }
 
@@ -404,7 +422,7 @@ namespace VirtualAquarium
                 {
                     ResetVelocity();
 
-                    State = FStates.Stay;
+                    State = FStates.Nothing;
                     return;
                 }
             }
@@ -422,7 +440,7 @@ namespace VirtualAquarium
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
             if (haveFishes)
-                transform.Rotate(0, singleStep, 0);
+                transform.Rotate(3 * singleStep, 3 * singleStep, 3 * singleStep);
             // Move em direção ao objetivo
             direction = Quaternion.Euler(transform.eulerAngles) * Vector3.forward;
             rigidbody.velocity = Mathf.Lerp(prevSpeed, fishArea.speed, Mathf.Clamp(timeSinceAnim / 3, 0f, 1f)) * direction;
@@ -449,9 +467,14 @@ namespace VirtualAquarium
 
         void Stay()
         {
-            this.timeStayed += Time.deltaTime;
+            timeStayedLife += Time.deltaTime;
+            timeStayed += Time.deltaTime;
             transform.position += transform.forward * Time.deltaTime * fishArea.speed / 20f;
             animator?.SetInteger("State", 0);
+            if (timeStayed > 5f)
+            {
+                State = FStates.Nothing;
+            }
         }
 
         internal void Move()
@@ -459,12 +482,11 @@ namespace VirtualAquarium
             lifeUpdate();
             switch (State)
             {
-                case FStates.Patrol:
-                    Patrol();
-                    break;
                 case FStates.Stay:
                     Stay();
-                    RequestDecision();
+                    break;
+                case FStates.Patrol:
+                    Patrol();
                     break;
                 case FStates.SwimAway:
                     SwimAway();
@@ -473,10 +495,13 @@ namespace VirtualAquarium
                     if (fishArea.feedPoint.foods.Contains(food))
                         Patrol();
                     else
-                        State = FStates.Patrol;
+                        State = FStates.Nothing;
                     break;
                 case FStates.Die:
                     Die();
+                    break;
+                case FStates.Nothing:
+                    RequestDecision();
                     break;
             }
         }
@@ -528,7 +553,7 @@ namespace VirtualAquarium
 
         private void OnTriggerEnter(Collider other)
         {
-            
+
             if (other.GetComponent<Collider>().tag == "Food")
             {
                 triggeredFood.Add(other.gameObject);
@@ -536,6 +561,10 @@ namespace VirtualAquarium
                 {
                     Eat(other.gameObject);
                 }
+            }
+            else if (other.GetComponent<Collider>().tag == "Player")
+            {
+                AddPlayer(other.transform);
             }
         }
 
@@ -560,30 +589,22 @@ namespace VirtualAquarium
             if (gameController.Simulador) GameObject.FindObjectOfType<DebugCanvas>().AddEat();
 
             ResetVelocity();
-            State = FStates.Stay;
+            State = FStates.Nothing;
         }
 
         private void OnTriggerExit(Collider other)
         {
             if (other.GetComponent<Collider>().tag == "Food")
                 triggeredFood.Remove(other.gameObject);
+            else if (other.GetComponent<Collider>().tag == "Player")
+                RemovePlayer(other.transform);
         }
 
         public void OnCollisionEnter(Collision other)
         {
-
             if (other.collider.tag == "Player")
             {
-                AddPlayer(other.transform);
-                AddReward(-0.01f);
-            }
-        }
-
-        public void OnCollisionExit(Collision other)
-        {
-            if (other.collider.tag == "Player")
-            {
-                RemovePlayer(other.collider.transform);
+                AddReward(-0.1f);
             }
         }
 

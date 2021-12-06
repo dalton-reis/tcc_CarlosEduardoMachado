@@ -2,58 +2,58 @@
     "VirtualAquarium": {
         "checkpoints": [
             {
-                "steps": 2499955,
-                "file_path": "results\\VirtualAquarium\\VirtualAquarium\\VirtualAquarium-2499955.onnx",
+                "steps": 497337,
+                "file_path": "results\\VirtualAquariumReproducaoFinal2\\VirtualAquarium\\VirtualAquarium-497337.onnx",
                 "reward": null,
-                "creation_time": 1631085056.651577,
+                "creation_time": 1638714750.6541107,
                 "auxillary_file_paths": [
-                    "results\\VirtualAquarium\\VirtualAquarium\\VirtualAquarium-2499955.pt"
+                    "results\\VirtualAquariumReproducaoFinal2\\VirtualAquarium\\VirtualAquarium-497337.pt"
                 ]
             },
             {
-                "steps": 2999955,
-                "file_path": "results\\VirtualAquarium\\VirtualAquarium\\VirtualAquarium-2999955.onnx",
+                "steps": 499971,
+                "file_path": "results\\VirtualAquariumReproducaoFinal2\\VirtualAquarium\\VirtualAquarium-499971.onnx",
                 "reward": null,
-                "creation_time": 1631088269.7057838,
+                "creation_time": 1638715060.0080829,
                 "auxillary_file_paths": [
-                    "results\\VirtualAquarium\\VirtualAquarium\\VirtualAquarium-2999955.pt"
+                    "results\\VirtualAquariumReproducaoFinal2\\VirtualAquarium\\VirtualAquarium-499971.pt"
                 ]
             },
             {
-                "steps": 3499997,
-                "file_path": "results\\VirtualAquarium\\VirtualAquarium\\VirtualAquarium-3499997.onnx",
+                "steps": 551319,
+                "file_path": "results\\VirtualAquariumReproducaoFinal2\\VirtualAquarium\\VirtualAquarium-551319.onnx",
                 "reward": null,
-                "creation_time": 1631091475.189763,
+                "creation_time": 1638717040.409935,
                 "auxillary_file_paths": [
-                    "results\\VirtualAquarium\\VirtualAquarium\\VirtualAquarium-3499997.pt"
+                    "results\\VirtualAquariumReproducaoFinal2\\VirtualAquarium\\VirtualAquarium-551319.pt"
                 ]
             },
             {
-                "steps": 3999983,
-                "file_path": "results\\VirtualAquarium\\VirtualAquarium\\VirtualAquarium-3999983.onnx",
-                "reward": null,
-                "creation_time": 1631094678.1445518,
+                "steps": 999971,
+                "file_path": "results\\VirtualAquariumReproducaoFinal2\\VirtualAquarium\\VirtualAquarium-999971.onnx",
+                "reward": 20.069679260253906,
+                "creation_time": 1638734140.533096,
                 "auxillary_file_paths": [
-                    "results\\VirtualAquarium\\VirtualAquarium\\VirtualAquarium-3999983.pt"
+                    "results\\VirtualAquariumReproducaoFinal2\\VirtualAquarium\\VirtualAquarium-999971.pt"
                 ]
             },
             {
-                "steps": 4243902,
-                "file_path": "results\\VirtualAquarium\\VirtualAquarium\\VirtualAquarium-4243902.onnx",
+                "steps": 1323700,
+                "file_path": "results\\VirtualAquariumReproducaoFinal2\\VirtualAquarium\\VirtualAquarium-1323700.onnx",
                 "reward": null,
-                "creation_time": 1631096180.3664649,
+                "creation_time": 1638740206.82823,
                 "auxillary_file_paths": [
-                    "results\\VirtualAquarium\\VirtualAquarium\\VirtualAquarium-4243902.pt"
+                    "results\\VirtualAquariumReproducaoFinal2\\VirtualAquarium\\VirtualAquarium-1323700.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 4243902,
-            "file_path": "results\\VirtualAquarium\\VirtualAquarium.onnx",
+            "steps": 1323700,
+            "file_path": "results\\VirtualAquariumReproducaoFinal2\\VirtualAquarium.onnx",
             "reward": null,
-            "creation_time": 1631096180.3664649,
+            "creation_time": 1638740206.82823,
             "auxillary_file_paths": [
-                "results\\VirtualAquarium\\VirtualAquarium\\VirtualAquarium-4243902.pt"
+                "results\\VirtualAquariumReproducaoFinal2\\VirtualAquarium\\VirtualAquarium-1323700.pt"
             ]
         }
     },

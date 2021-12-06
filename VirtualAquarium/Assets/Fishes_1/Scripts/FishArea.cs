@@ -214,12 +214,10 @@ namespace VirtualAquarium
 
         public Vector3 GetRandomPoint()
         {
-
-            float x = UnityEngine.Random.Range(min.x, max.x);
-            float y = UnityEngine.Random.Range(min.y, max.y);
-            float z = UnityEngine.Random.Range(min.z, max.z);
-            Vector3 p = new Vector3(x, y, z);
-            return p;
+            Vector3 target = new Vector3(UnityEngine.Random.Range(0f, 1f) * bounds.size.x / 2 * 0.9f,
+                                 UnityEngine.Random.Range(0f, 1f) * bounds.size.y / 2 * 0.9f,
+                                 UnityEngine.Random.Range(0f, 1f) * bounds.size.z / 2 * 0.9f);
+            return target;
         }
 
         public void removeFood()

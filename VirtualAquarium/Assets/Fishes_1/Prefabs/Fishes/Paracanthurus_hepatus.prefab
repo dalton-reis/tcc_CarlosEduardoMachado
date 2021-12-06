@@ -373,6 +373,7 @@ MonoBehaviour:
   heuristic: {x: 0, y: 0, z: 0}
   totalReward: 0
   SpawnTimeDays: 0
+  energy: 100
   prefab: {fileID: 0}
   lossLifeCoefficient: 0
   MaxTemperatureSupported: 27
@@ -429,7 +430,7 @@ MonoBehaviour:
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 3
-      BranchSizes: 0200000002000000
+      BranchSizes: 020000000200000002000000
     VectorActionSize: 
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
@@ -456,7 +457,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &7072935835476688424
 BoxCollider:

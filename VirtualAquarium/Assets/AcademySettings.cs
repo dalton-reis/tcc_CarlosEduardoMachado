@@ -19,6 +19,7 @@ namespace Unity.MLAgentsExamples
         int m_OriginalSolverIterations;
         int m_OriginalSolverVelocityIterations;
         bool m_OriginalReuseCollisionCallbacks;
+        float timeSinceLastChange = 60 * 10;
 
         [Tooltip("Increase or decrease the scene gravity. Use ~3x to make things less floaty")]
         public float gravityMultiplier = 1.0f;
@@ -59,6 +60,18 @@ namespace Unity.MLAgentsExamples
             GameObject.FindObjectOfType<GameController>().Simulador = true;
 
             AquariumProperties.CurrentTimeSpeed = AquariumProperties.TimeSpeed.Slow;
+
+            
+        }
+
+        public void Update()
+        {
+            timeSinceLastChange = Time.deltaTime;
+            if (timeSinceLastChange >= 60 * Random.Range(5f, 7f))
+            {
+                timeSinceLastChange = 0;
+                AquariumProperties.CurrentTimeSpeed = (AquariumProperties.TimeSpeed) Random.Range(0, 5);                
+            }
         }
 
         public void OnDestroy()

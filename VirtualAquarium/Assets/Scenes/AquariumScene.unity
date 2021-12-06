@@ -12799,8 +12799,8 @@ MonoBehaviour:
   feedPoint: {fileID: 531284140}
   particleFood: {fileID: 1939820014}
   bounds:
-    m_Center: {x: 0.3610001, y: 5.4, z: 5.552}
-    m_Extent: {x: 8, y: 3.5, z: 5}
+    m_Center: {x: 0, y: 5, z: 2}
+    m_Extent: {x: 6, y: 3, z: 3}
   fishesInformation: {fileID: 61840507}
   fishes: []
   eggFish: {fileID: 1274836939097133229, guid: ce293e55658725840a41d56ab558f426, type: 3}
@@ -12812,8 +12812,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1177938167}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.434, y: 4.92, z: 5.914}
-  m_LocalScale: {x: 1.868, y: 1.5741, z: 6.119932}
+  m_LocalPosition: {x: 0, y: 5, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -16175,7 +16175,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1631333083}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 4.89, z: 12.81}
+  m_LocalPosition: {x: 0, y: 5, z: 13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
