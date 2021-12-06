@@ -197,8 +197,6 @@ namespace VirtualAquarium
 
         public override void OnActionReceived(ActionBuffers actions)
         {
-
-
             if (actions.DiscreteActions[0] == 1)
             {
                 Feed();
