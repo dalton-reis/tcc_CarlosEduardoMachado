@@ -46,7 +46,7 @@ public class AquariumProperties : ScriptableObject {
                     timeSpeedMultiplier = 30;
                     break;
                 case TimeSpeed.SuperFast:
-                    timeSpeedMultiplier = 10;
+                    timeSpeedMultiplier = 20;
                     break;
             }
         } }

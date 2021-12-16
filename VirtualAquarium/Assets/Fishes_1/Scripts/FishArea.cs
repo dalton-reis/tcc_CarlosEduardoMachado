@@ -200,7 +200,7 @@ namespace VirtualAquarium
             for (int i = 0; i < fishes.Count; i++)
             {
                 Transform temp = fishes[i].transform;
-                temp.position = GetRandomPoint();
+                temp.position = GetRandomPoint() + transform.position;
                 temp.Rotate(0f, UnityEngine.Random.Range(0f, 360f), 0f, Space.Self);
             }
 

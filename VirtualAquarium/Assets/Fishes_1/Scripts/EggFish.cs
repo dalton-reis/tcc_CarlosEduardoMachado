@@ -71,7 +71,7 @@ namespace VirtualAquarium
             {
                 timeSinceFertilized += Time.deltaTime / AquariumProperties.timeSpeedMultiplier;
 
-                if ((AquariumProperties.CurrentTimeSpeed == AquariumProperties.TimeSpeed.SuperFast && timeSinceFertilized > 6) || timeSinceFertilized > 100)
+                if ((AquariumProperties.CurrentTimeSpeed == AquariumProperties.TimeSpeed.SuperFast && timeSinceFertilized > 1) || timeSinceFertilized > 100)
                 {
                     if (!GameObject.FindObjectOfType<GameController>().Simulador)
                     {

@@ -300,7 +300,10 @@ namespace VirtualAquarium
 
                         if (startScale.x > transform.localScale.x)
                         {
-                            transform.localScale = transform.localScale + (startScale / AquariumProperties.timeSpeedMultiplier / 100);
+                            if (AquariumProperties.CurrentTimeSpeed == AquariumProperties.TimeSpeed.SuperFast)
+                                transform.localScale = transform.localScale + (startScale / AquariumProperties.timeSpeedMultiplier / 2);
+                            else
+                                transform.localScale = transform.localScale + (startScale / AquariumProperties.timeSpeedMultiplier / 100);
                             if (transform.localScale.x > startScale.x)
                                 transform.localScale = startScale;
                         }
@@ -474,6 +477,7 @@ namespace VirtualAquarium
             timeStayed += Time.deltaTime;
             transform.position += transform.forward * Time.deltaTime * fishArea.speed / 20f;
             animator?.SetInteger("State", 0);
+            ResetVelocity();
             if (timeStayed > 5f)
             {
                 State = FStates.Nothing;
@@ -517,7 +521,7 @@ namespace VirtualAquarium
         internal void Initialize(FishArea fishArea, bool newChildren)
         {
             fishArea = GameObject.FindObjectOfType<FishArea>();
-            State = FStates.Patrol;
+            State = FStates.Nothing;
             this.iniciado = true;
             this.fishArea = fishArea;
             animator = GetComponent<Animator>();

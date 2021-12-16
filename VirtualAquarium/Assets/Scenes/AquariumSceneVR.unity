@@ -10948,7 +10948,7 @@ MonoBehaviour:
   - {fileID: 1699281715987844, guid: 179cba5c4a8fbdb4f834ad47a3596856, type: 3}
   - {fileID: 1939980075445004, guid: dacf93d649323df42981d1f86e31f709, type: 3}
   - {fileID: 1327104955442478, guid: 1c56ae5a22e10c74c9590e64cc43e749, type: 3}
-  count: 10
+  count: 6
   speed: 0.5
   rotationSpeed: 9
   raycastDistance: 2
@@ -10958,7 +10958,13 @@ MonoBehaviour:
     m_Center: {x: 0, y: 5, z: 2}
     m_Extent: {x: 6, y: 3, z: 3}
   fishesInformation: {fileID: 2103003737}
-  fishes: []
+  fishes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   eggFish: {fileID: 1274836939097133229, guid: ce293e55658725840a41d56ab558f426, type: 3}
 --- !u!4 &1177938170
 Transform:
