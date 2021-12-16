@@ -139,3 +139,11 @@ Ajustes pequenos na mente ... deixou mais tempo treinando.
 Trabalhou no artigo.  
 Mudou o fluxograma, mais no peixe e menos no aquário.  Disse que podia usar o fluxograma que existe no GIT.  
 Chegou a hora de mostrar para o prof. Sergio.  
+
+## 2021-12-16
+
+Defesa
+[tcc_CarlosEduardoMachado_2021-12-15_Previa_video.mp4](tcc_CarlosEduardoMachado_2021-12-15_Previa_video.mp4)  
+[tcc_CarlosEduardoMachado_2021-12-16_defesa_Ata.pdf](tcc_CarlosEduardoMachado_2021-12-16_defesa_Ata.pdf)  
+[tcc_CarlosEduardoMachado_2021-12-16_defesa_Marcel.pdf](tcc_CarlosEduardoMachado_2021-12-16_defesa_Marcel.pdf)  
+[tcc_CarlosEduardoMachado_2021-12-16_defesa_Andreza.pdf](tcc_CarlosEduardoMachado_2021-12-16_defesa_Andreza.pdf)  
