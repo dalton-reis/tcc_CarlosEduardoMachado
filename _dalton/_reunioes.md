@@ -142,7 +142,7 @@ Chegou a hora de mostrar para o prof. Sergio.
 
 ## 2021-12-16
 
-Defesa
+Defesa  
 [tcc_CarlosEduardoMachado_2021-12-15_Previa_video.mp4](tcc_CarlosEduardoMachado_2021-12-15_Previa_video.mp4)  
 [tcc_CarlosEduardoMachado_2021-12-16_defesa_Ata.pdf](tcc_CarlosEduardoMachado_2021-12-16_defesa_Ata.pdf)  
 [tcc_CarlosEduardoMachado_2021-12-16_defesa_Marcel.pdf](tcc_CarlosEduardoMachado_2021-12-16_defesa_Marcel.pdf)  
