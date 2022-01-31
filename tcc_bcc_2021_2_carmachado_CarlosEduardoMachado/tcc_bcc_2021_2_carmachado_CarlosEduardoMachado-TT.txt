@@ -1,0 +1,12 @@
+Tutorial Aquário Virtual: Ciclo Reprodutivo Ovíparo - Carlos Eduardo Machado
+==================================================
+Instalar Softwares necessários
+- Unity Hub
+- Unity 2021.1.18f1 (com build para Android)
+- 
+
+==================================================
+Configuração Unity HUB e projeto
+1. No Unity Hub, adicionar a pasta de fontes como pasta de um projeto
+2. Abrir o projeto
+2.1 O Unity deve baixar as dependência (a primeira vez demora mais)
