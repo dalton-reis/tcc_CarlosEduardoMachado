@@ -3,10 +3,27 @@ Tutorial Aquário Virtual: Ciclo Reprodutivo Ovíparo - Carlos Eduardo Machado
 Instalar Softwares necessários
 - Unity Hub
 - Unity 2021.1.18f1 (com build para Android)
-- 
+- Python 3.9.6
+- Bibliotecas Python:
+ - mlagents 0.27.0
+ - mlagents-envs 0.27.0
+ - gym-unity 0.27.0
 
+O download desses programas pode ser feito em seus sites oficiais.
+As bibliotecas Python podem ser instaladas através do comando pip install
+Caso restem dúvidas é possível utilizar a pagina do github do Unity no link: https://github.com/Unity-Technologies/ml-agents/blob/release_19_docs/docs/Installation.md
 ==================================================
 Configuração Unity HUB e projeto
 1. No Unity Hub, adicionar a pasta de fontes como pasta de um projeto
 2. Abrir o projeto
 2.1 O Unity deve baixar as dependência (a primeira vez demora mais)
+3. Ir para a cena "InitialScene" (na pasta Scenes)
+4. Rodar o projeto
+4.1 O Unity fará o build do projeto e gerar os arquivos necessários (a primeira vez demora mais)
+==================================================
+Para realizar o treinamento é necessário seguir os seguintes passos:
+1. Na pasta do projeto Unity (VirtualAquarium), pelo prompt de comando rodar a seguinte linha de comando:
+mlagents-learn config/VirtualAquarium.yaml --run-id=Exemplo
+2. Rodar a cena de treinamento por dentro do Unity
+3. Quando terminado o treinamento será gerada uma pasta em /results/Exemplo com os resultados do treinmaneto
+4. Mover o VirtualAquarium.onnx para a pasta Assets fará com que os peixes utilizem esse resultado para controlar as ações dos agentes.
